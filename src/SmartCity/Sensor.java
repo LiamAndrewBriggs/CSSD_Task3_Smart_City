@@ -17,7 +17,7 @@ public class Sensor {
         
     }
     
-    public getData() {
+    public Data getData() {
         
     }
 }

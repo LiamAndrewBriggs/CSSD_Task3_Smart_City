@@ -14,11 +14,11 @@ public class Location {
     private double latitude;
     private double longitude;
     
-    public getCoords() {
+    public SensorMonitor getCoords() {
         
     }
     
-    public toAddress(){
+    public void toAddress(){
         
     }
     

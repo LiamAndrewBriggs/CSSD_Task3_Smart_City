@@ -19,35 +19,35 @@ public class SensorStation {
 
     }
     
-    public addNewSensorMonitor(){
+    public void addNewSensorMonitor(){
         
     }
     
-    public removeSensorMonitor(){
+    public void removeSensorMonitor(){
         
     }
     
-    public receiveSensorData(embellishedData){
+    public PublicInterface receiveSensorData(embellishedData){
         
     }
     
-    public updateSensorFrequeny(){
+    public void updateSensorFrequency(){
     
     }
     
-    public registerObserver(mothership){
+    public void registerObserver(mothership){
         
     }
 
-    public unregisterObserver(mothership){
+    public void unregisterObserver(mothership){
         
     }
     
-    public getSensorMonitors(){
+    public List<SensorMonitor> getSensorMonitors(){
     
     }
     
-    public getSensorMonitor(){
+    public SensorMonitor getSensorMonitor(){
         
     }       
 }
