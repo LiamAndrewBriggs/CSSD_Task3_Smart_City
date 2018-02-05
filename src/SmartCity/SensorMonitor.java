@@ -29,4 +29,16 @@ public class SensorMonitor {
         
     }
     
+    public void setLocation(Location location)
+    {
+        
+    }
+    
+    public Location getLocation()
+    {
+        
+    }
+    
+    
+    
 }
