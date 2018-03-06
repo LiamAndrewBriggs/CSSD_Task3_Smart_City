@@ -1,10 +1,10 @@
 package SmartCity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Mothership {
     //private {id} ID;
-    private List<SensorStation> sensorStations;
+    private ArrayList<SensorStation> sensorStations;
     
     public void addNewSensorStation()
     {
@@ -21,7 +21,7 @@ public class Mothership {
         //todo
     }
     
-    public List<SensorStation> getSensorStations()
+    public ArrayList<SensorStation> getSensorStations()
     {
         return sensorStations;
     }

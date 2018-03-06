@@ -43,7 +43,7 @@ public class UserInterface extends javax.swing.JFrame {
     
     public void start()
     {
-        //sensorStations = motherShip.getSensorStations();
+        sensorStations = motherShip.getSensorStations();
         populateSensorStationList();
     }
     
@@ -60,13 +60,6 @@ public class UserInterface extends javax.swing.JFrame {
     public void selectSensorStation()
     {
         //currentSensorStation = motherShip.getSensorStation(sensorStationID);
-    }
-    
-    public void viewSensorStationButtonClicked()
-    {
-        //switchScreen(sensorStation);
-        //sensorMonitors = currentSensorStation.getSensorMonitors();
-        populateSensorMonitorList();
     }
     
     public void selectSensorMonitor()
@@ -101,18 +94,6 @@ public class UserInterface extends javax.swing.JFrame {
         //switchScreen(sensorStation);
     }
     
-    public void addSensorButtonClicked()
-    {
-        //switchScreen(addSensor);
-        
-        //addSensorSequenceDiagram has same button doing different thing
-        //no if condition is in diagram
-        
-        //currentSensorMonitor = currentSensorMonitor.SensorMonitor();
-        //currentSensorStation.addSensorMonitor(currentSensorMonitor);
-        //switchScreen(addSensor);
-    }
-    
     public void changeFrequencyValue()
     {
         //todo
@@ -139,22 +120,107 @@ public class UserInterface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        sensorStationTable = new javax.swing.JTable();
+        viewSensorStation = new javax.swing.JButton();
+        addSensorStation = new javax.swing.JButton();
+        removeSensorStation = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        sensorStationTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Sensor Station", "Location", "Number of Active Sensors "
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(sensorStationTable);
+        sensorStationTable.getAccessibleContext().setAccessibleName("");
+
+        viewSensorStation.setText("View Sensor Station");
+        viewSensorStation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                viewSensorStationButtonClicked(evt);
+            }
+        });
+
+        addSensorStation.setText("Add Sensor Station");
+        addSensorStation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addSensorButtonClicked(evt);
+            }
+        });
+
+        removeSensorStation.setText("Remove Sensor Station");
+        removeSensorStation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeSensorStationButtonClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 593, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(viewSensorStation)
+                        .addGap(72, 72, 72)
+                        .addComponent(addSensorStation)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(removeSensorStation))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewSensorStation)
+                    .addComponent(addSensorStation)
+                    .addComponent(removeSensorStation))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void viewSensorStationButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewSensorStationButtonClicked
+        //switchScreen(sensorStation);
+        //sensorMonitors = currentSensorStation.getSensorMonitors();
+        populateSensorMonitorList();
+    }//GEN-LAST:event_viewSensorStationButtonClicked
+
+    private void addSensorButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorButtonClicked
+        //switchScreen(addSensor);
+        
+        //addSensorSequenceDiagram has same button doing different thing
+        //no if condition is in diagram
+        
+        //currentSensorMonitor = currentSensorMonitor.SensorMonitor();
+        //currentSensorStation.addSensorMonitor(currentSensorMonitor);
+        //switchScreen(addSensor);
+    }//GEN-LAST:event_addSensorButtonClicked
+
+    private void removeSensorStationButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeSensorStationButtonClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeSensorStationButtonClicked
 
     /**
     * @param args the command line arguments
@@ -171,6 +237,11 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addSensorStation;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton removeSensorStation;
+    private javax.swing.JTable sensorStationTable;
+    private javax.swing.JButton viewSensorStation;
     // End of variables declaration//GEN-END:variables
 
 
