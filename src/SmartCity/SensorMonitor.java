@@ -36,7 +36,9 @@ public class SensorMonitor {
     
     public Location getLocation()
     {
+        Location temp = new Location();
         
+        return temp;
     }
     
     

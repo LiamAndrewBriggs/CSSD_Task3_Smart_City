@@ -18,6 +18,8 @@ public class Sensor {
     }
     
     public Data getData() {
+        Data temp = new Data();
         
+        return temp;
     }
 }

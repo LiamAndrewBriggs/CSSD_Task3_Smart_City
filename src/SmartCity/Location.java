@@ -15,7 +15,9 @@ public class Location {
     private double longitude;
     
     public SensorMonitor getCoords() {
+        SensorMonitor temp = new SensorMonitor();
         
+        return temp;
     }
     
     public void toAddress(){

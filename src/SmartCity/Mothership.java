@@ -3,7 +3,7 @@ package SmartCity;
 import java.util.List;
 
 public class Mothership {
-    private {id} ID;
+    //private {id} ID;
     private List<SensorStation> sensorStations;
     
     public void addNewSensorStation()
