@@ -1,6 +1,8 @@
 package SmartCity;
 import java.util.ArrayList;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class UserInterface extends javax.swing.JFrame {
 
@@ -22,6 +24,7 @@ public class UserInterface extends javax.swing.JFrame {
         motherShip.addNewSensorStation();
         sensorStations = motherShip.getSensorStations();
         populateSensorStationList();
+        sort();
     }
     
     public void switchScreens()
@@ -69,6 +72,26 @@ public class UserInterface extends javax.swing.JFrame {
         //todo
     }
     
+    private void sort() 
+    {
+        DefaultTableModel model = (DefaultTableModel)sensorStationTable.getModel();
+        
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(model);
+        
+        sensorStationTable.setRowSorter(sorter);
+    }
+    
+    private void search(String query) 
+    {
+        DefaultTableModel model = (DefaultTableModel)sensorStationTable.getModel();
+        
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(model);
+        
+        sensorStationTable.setRowSorter(sorter);
+        
+        sorter.setRowFilter(RowFilter.regexFilter(query));
+    }
+    
     public void updateButtonClicked()
     {
         //sensorMonitors.setFrequency(frequency);
@@ -89,6 +112,8 @@ public class UserInterface extends javax.swing.JFrame {
     {
         //todo
     }
+    
+    
         
    
 
@@ -106,6 +131,7 @@ public class UserInterface extends javax.swing.JFrame {
         viewSensorStation = new javax.swing.JButton();
         addSensorStation = new javax.swing.JButton();
         removeSensorStation = new javax.swing.JButton();
+        searchField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -150,6 +176,13 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
+        searchField.setText("Search");
+        searchField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchFieldKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,13 +190,18 @@ public class UserInterface extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(viewSensorStation)
                         .addGap(36, 36, 36)
-                        .addComponent(addSensorStation)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(removeSensorStation))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(addSensorStation)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(removeSensorStation))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -175,8 +213,10 @@ public class UserInterface extends javax.swing.JFrame {
                     .addComponent(addSensorStation)
                     .addComponent(removeSensorStation))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,6 +243,12 @@ public class UserInterface extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_removeSensorStationButtonClicked
 
+    private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
+        String query = searchField.getText().toLowerCase();
+        
+        search(query);
+    }//GEN-LAST:event_searchFieldKeyReleased
+
     /**
     * @param args the command line arguments
     */
@@ -221,6 +267,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JButton addSensorStation;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton removeSensorStation;
+    private javax.swing.JTextField searchField;
     private javax.swing.JTable sensorStationTable;
     private javax.swing.JButton viewSensorStation;
     // End of variables declaration//GEN-END:variables

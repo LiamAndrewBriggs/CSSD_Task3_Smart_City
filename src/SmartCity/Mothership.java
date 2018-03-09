@@ -10,6 +10,9 @@ public class Mothership {
     {
         SensorStation newStation = new SensorStation("test");
         sensorStations.add(newStation);
+        
+        newStation = new SensorStation("abc");
+        sensorStations.add(newStation);
     }
     
     public void removeSensorStation()
