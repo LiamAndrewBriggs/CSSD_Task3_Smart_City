@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 public class Mothership {
     //private {id} ID;
-    private ArrayList<SensorStation> sensorStations;
+    private ArrayList<SensorStation> sensorStations = new ArrayList<>();
     
     public void addNewSensorStation()
     {
-        //todo
+        SensorStation newStation = new SensorStation("test");
+        sensorStations.add(newStation);
     }
     
     public void removeSensorStation()

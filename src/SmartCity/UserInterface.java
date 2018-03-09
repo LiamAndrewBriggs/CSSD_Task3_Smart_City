@@ -1,40 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package SmartCity;
-
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.Box;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Kutoma
- */
 public class UserInterface extends javax.swing.JFrame {
 
-       
-    /** Creates new form LibraryGUI */
     public UserInterface() {
 
         initComponents();
-        
-        
+        start();
     }
     
-    private Mothership motherShip;
+    private Mothership motherShip = new Mothership();
     private ArrayList<SensorStation> sensorStations;
     private ArrayList<SensorMonitor> sensorMonitors;
     private SensorStation currentSensorStation; 
@@ -43,6 +19,7 @@ public class UserInterface extends javax.swing.JFrame {
     
     public void start()
     {
+        motherShip.addNewSensorStation();
         sensorStations = motherShip.getSensorStations();
         populateSensorStationList();
     }
@@ -80,7 +57,11 @@ public class UserInterface extends javax.swing.JFrame {
     
     private void populateSensorStationList()
     {
-        //todo
+        DefaultTableModel model = (DefaultTableModel)sensorStationTable.getModel();
+        
+        for (SensorStation thisStation : sensorStations) {
+            model.addRow(new Object[]{thisStation.getName(), "Column 2", "Column 3"});
+        }
     }
     
     private void populateSensorDetails()
@@ -138,7 +119,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -178,7 +159,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(viewSensorStation)
-                        .addGap(72, 72, 72)
+                        .addGap(36, 36, 36)
                         .addComponent(addSensorStation)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(removeSensorStation))

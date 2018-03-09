@@ -1,15 +1,18 @@
 package SmartCity;
 
 import java.util.List;
+import java.util.UUID;
 
 public class SensorStation {
     
     private String stationID;
+    private String stationName;
     private List<SensorMonitor> sensorMonitors;
     private Mothership observer;
     
-    public SensorStation(){
-
+    public SensorStation(String name){
+        stationID = UUID.randomUUID().toString();
+        stationName = name;
     }
     
     public void addNewSensorMonitor(){
@@ -46,6 +49,10 @@ public class SensorStation {
         SensorMonitor temp = new SensorMonitor();
         
         return temp;
-    }       
+    }
+    
+    public String getName() {
+        return stationName;
+    }
 }
 
