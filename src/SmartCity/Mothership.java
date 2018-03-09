@@ -20,9 +20,16 @@ public class Mothership {
         //todo
     }
     
-    public void getSensorStation()
+    public SensorStation getSensorStation(String sensorID)
     {
-        //todo
+        SensorStation aSensorStation = new SensorStation(); 
+        
+        for (SensorStation thisStation : sensorStations) {
+            if(thisStation.getID().equals(sensorID));
+            aSensorStation = thisStation;
+        }
+        
+        return aSensorStation;
     }
     
     public ArrayList<SensorStation> getSensorStations()

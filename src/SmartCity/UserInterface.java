@@ -1,7 +1,10 @@
 package SmartCity;
+import java.awt.Dimension;
+import java.awt.Insets;
 import java.util.ArrayList;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 
 public class UserInterface extends javax.swing.JFrame {
@@ -29,12 +32,18 @@ public class UserInterface extends javax.swing.JFrame {
     
     public void switchScreens()
     {
-        //todo
-    }
-    
-    public void switchScreen()
-    {
-        //todo
+        if(currentSensorMonitor == null && currentSensorStation == null) {
+            this.setVisible(true);
+            sensorMonitorSelectFrame.show(false);
+        }
+        else if (currentSensorMonitor == null) {
+            this.setVisible(false);
+            sensorMonitorSelectFrame.show(true);
+            Insets insets = sensorMonitorSelectFrame.getInsets();
+            sensorMonitorSelectFrame.setSize(new Dimension(insets.left + insets.right + 593,
+             insets.top + insets.bottom + 530));
+        }
+        
     }
     
     public void selectSensorStation()
@@ -63,8 +72,11 @@ public class UserInterface extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)sensorStationTable.getModel();
         
         for (SensorStation thisStation : sensorStations) {
-            model.addRow(new Object[]{thisStation.getName(), "Column 2", "Column 3"});
+            model.addRow(new Object[]{thisStation.getName(), "Column 2", "Column 3", thisStation.getID()});
         }
+        
+        TableColumnModel tcm = sensorStationTable.getColumnModel();
+        tcm.removeColumn(tcm.getColumn(3));
     }
     
     private void populateSensorDetails()
@@ -113,9 +125,6 @@ public class UserInterface extends javax.swing.JFrame {
         //todo
     }
     
-    
-        
-   
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -126,12 +135,80 @@ public class UserInterface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        sensorMonitorSelectFrame = new javax.swing.JFrame();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        sensorMonitorTable = new javax.swing.JTable();
+        searchField1 = new javax.swing.JTextField();
+        backToHomeScreen = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         sensorStationTable = new javax.swing.JTable();
         viewSensorStation = new javax.swing.JButton();
         addSensorStation = new javax.swing.JButton();
         removeSensorStation = new javax.swing.JButton();
         searchField = new javax.swing.JTextField();
+
+        sensorMonitorSelectFrame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        sensorMonitorSelectFrame.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        sensorMonitorTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Sensor Description", "CurrentData", "Status", "Frequency", "ID"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(sensorMonitorTable);
+
+        searchField1.setText("Search");
+        searchField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchField1KeyReleased(evt);
+            }
+        });
+
+        backToHomeScreen.setText("Back");
+        backToHomeScreen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backToHomeScreenMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout sensorMonitorSelectFrameLayout = new javax.swing.GroupLayout(sensorMonitorSelectFrame.getContentPane());
+        sensorMonitorSelectFrame.getContentPane().setLayout(sensorMonitorSelectFrameLayout);
+        sensorMonitorSelectFrameLayout.setHorizontalGroup(
+            sensorMonitorSelectFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sensorMonitorSelectFrameLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(sensorMonitorSelectFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(backToHomeScreen)
+                    .addGroup(sensorMonitorSelectFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(sensorMonitorSelectFrameLayout.createSequentialGroup()
+                            .addGap(163, 163, 163)
+                            .addComponent(searchField1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, Short.MAX_VALUE))))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        sensorMonitorSelectFrameLayout.setVerticalGroup(
+            sensorMonitorSelectFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sensorMonitorSelectFrameLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(backToHomeScreen)
+                .addGap(18, 18, 18)
+                .addComponent(searchField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -141,11 +218,11 @@ public class UserInterface extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Sensor Station", "Location", "Number of Active Sensors "
+                "Sensor Station", "Location", "Number of Active Sensors ", "ID"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -223,9 +300,18 @@ public class UserInterface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewSensorStationButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewSensorStationButtonClicked
-        //switchScreen(sensorStation);
-        //sensorMonitors = currentSensorStation.getSensorMonitors();
-        populateSensorMonitorList();
+        int column = 3;
+        int row = sensorStationTable.getSelectedRow();
+        if(row == -1) {
+            
+        }
+        else {
+            String sensorStationID = sensorStationTable.getModel().getValueAt(row, column).toString();
+            currentSensorStation = motherShip.getSensorStation(sensorStationID);
+            switchScreens();
+            //sensorMonitors = currentSensorStation.getSensorMonitors();
+            populateSensorMonitorList();
+        }
     }//GEN-LAST:event_viewSensorStationButtonClicked
 
     private void addSensorButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorButtonClicked
@@ -249,6 +335,15 @@ public class UserInterface extends javax.swing.JFrame {
         search(query);
     }//GEN-LAST:event_searchFieldKeyReleased
 
+    private void searchField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchField1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchField1KeyReleased
+
+    private void backToHomeScreenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backToHomeScreenMouseClicked
+        currentSensorStation = null;
+        switchScreens();
+    }//GEN-LAST:event_backToHomeScreenMouseClicked
+
     /**
     * @param args the command line arguments
     */
@@ -265,9 +360,14 @@ public class UserInterface extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addSensorStation;
+    private javax.swing.JButton backToHomeScreen;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton removeSensorStation;
     private javax.swing.JTextField searchField;
+    private javax.swing.JTextField searchField1;
+    private javax.swing.JFrame sensorMonitorSelectFrame;
+    private javax.swing.JTable sensorMonitorTable;
     private javax.swing.JTable sensorStationTable;
     private javax.swing.JButton viewSensorStation;
     // End of variables declaration//GEN-END:variables

@@ -15,6 +15,10 @@ public class SensorStation {
         stationName = name;
     }
     
+    public SensorStation(){
+
+    }
+    
     public void addNewSensorMonitor(){
         
     }
@@ -53,6 +57,10 @@ public class SensorStation {
     
     public String getName() {
         return stationName;
+    }
+    
+    public String getID() {
+        return stationID;
     }
 }
 
