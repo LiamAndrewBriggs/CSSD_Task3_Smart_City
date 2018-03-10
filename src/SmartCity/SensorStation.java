@@ -50,10 +50,16 @@ public class SensorStation {
         return sensorMonitors;
    }
     
-    public SensorMonitor getSensorMonitor(){
-        SensorMonitor temp = new SensorMonitor();
+    public SensorMonitor getSensorMonitor(String monitorID)
+    {
+        SensorMonitor aSensorMonitor = new SensorMonitor(); 
         
-        return temp;
+        for (SensorMonitor thisStation : sensorMonitors) {
+            if(thisStation.getID().equals(monitorID));
+            aSensorMonitor = thisStation;
+        }
+        
+        return aSensorMonitor;
     }
     
     public String getName() {
