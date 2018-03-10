@@ -1,13 +1,13 @@
 package SmartCity;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class SensorStation {
     
     private String stationID;
     private String stationName;
-    private List<SensorMonitor> sensorMonitors;
+    private ArrayList<SensorMonitor> sensorMonitors = new ArrayList<>();
     private Mothership observer;
     
     public SensorStation(String name){
@@ -20,7 +20,8 @@ public class SensorStation {
     }
     
     public void addNewSensorMonitor(){
-        
+        SensorMonitor newStation = new SensorMonitor("test");
+        sensorMonitors.add(newStation);
     }
     
     public void removeSensorMonitor(){
@@ -45,7 +46,7 @@ public class SensorStation {
         
     }
     
-    public List<SensorMonitor> getSensorMonitors(){
+    public ArrayList<SensorMonitor> getSensorMonitors(){
         return sensorMonitors;
    }
     

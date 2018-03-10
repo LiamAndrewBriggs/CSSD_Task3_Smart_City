@@ -2,6 +2,7 @@ package SmartCity;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -9,21 +10,22 @@ import javax.swing.table.TableRowSorter;
 
 public class UserInterface extends javax.swing.JFrame {
 
-    public UserInterface() {
-
-        initComponents();
-        start();
-    }
-    
     private Mothership motherShip = new Mothership();
     private ArrayList<SensorStation> sensorStations;
     private ArrayList<SensorMonitor> sensorMonitors;
     private SensorStation currentSensorStation; 
     private SensorMonitor currentSensorMonitor;
-
+       
     
+    public UserInterface() {
+        initComponents();
+        start();
+    }
+     
     public void start()
     {
+        TableColumnModel tcm = sensorMonitorTable.getColumnModel();
+        sensorMonitorTable.removeColumn(tcm.getColumn(4));
         motherShip.addNewSensorStation();
         sensorStations = motherShip.getSensorStations();
         populateSensorStationList();
@@ -48,12 +50,22 @@ public class UserInterface extends javax.swing.JFrame {
     
     public void selectSensorStation()
     {
-        //currentSensorStation = motherShip.getSensorStation(sensorStationID);
+        int column = 3;
+        int row = sensorStationTable.getSelectedRow();
+        
+        if(row == -1)
+        {
+            //alert
+        }
+        else {
+            String sensorStationID = sensorStationTable.getModel().getValueAt(row, column).toString();
+            currentSensorStation = motherShip.getSensorStation(sensorStationID);
+        }
     }
     
     public void selectSensorMonitor()
     {
-        currentSensorMonitor = currentSensorStation.getSensorMonitor();
+        //currentSensorStation = currentSensorStation.getSensorStation();
     }
     
     public void updateSensorButtonClicked()
@@ -64,16 +76,21 @@ public class UserInterface extends javax.swing.JFrame {
     
     private void populateSensorMonitorList()
     {
-        //todo
+        DefaultTableModel model = (DefaultTableModel)sensorMonitorTable.getModel();
+        
+        sensorMonitors.forEach((thisMonitor) -> {
+            model.addRow(new Object[]{thisMonitor.getDescription(), "Column 2", "Column 3", "Column 4", thisMonitor.getID()});
+        });
     }
     
     private void populateSensorStationList()
     {
         DefaultTableModel model = (DefaultTableModel)sensorStationTable.getModel();
         
-        for (SensorStation thisStation : sensorStations) {
+        sensorStations.forEach((SensorStation thisStation) -> {
+            thisStation.addNewSensorMonitor();
             model.addRow(new Object[]{thisStation.getName(), "Column 2", "Column 3", thisStation.getID()});
-        }
+        });
         
         TableColumnModel tcm = sensorStationTable.getColumnModel();
         tcm.removeColumn(tcm.getColumn(3));
@@ -300,18 +317,10 @@ public class UserInterface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewSensorStationButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewSensorStationButtonClicked
-        int column = 3;
-        int row = sensorStationTable.getSelectedRow();
-        if(row == -1) {
-            
-        }
-        else {
-            String sensorStationID = sensorStationTable.getModel().getValueAt(row, column).toString();
-            currentSensorStation = motherShip.getSensorStation(sensorStationID);
+            selectSensorStation();
             switchScreens();
-            //sensorMonitors = currentSensorStation.getSensorMonitors();
+            sensorMonitors = currentSensorStation.getSensorMonitors();
             populateSensorMonitorList();
-        }
     }//GEN-LAST:event_viewSensorStationButtonClicked
 
     private void addSensorButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorButtonClicked
@@ -341,6 +350,9 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void backToHomeScreenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backToHomeScreenMouseClicked
         currentSensorStation = null;
+        DefaultTableModel model = (DefaultTableModel)sensorMonitorTable.getModel();
+        model.setRowCount(0);
+                
         switchScreens();
     }//GEN-LAST:event_backToHomeScreenMouseClicked
 

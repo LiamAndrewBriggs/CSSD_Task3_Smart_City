@@ -9,6 +9,7 @@ import java.util.*;
 public class SensorMonitor {
     
     private String sensorMonitorID;
+    private String sensorDescription;
     private ArrayList<Double> coords = new ArrayList<>();
     private Boolean isActive;
     private Double interval;
@@ -22,6 +23,12 @@ public class SensorMonitor {
     public SensorMonitor()
     {
         
+    }
+    
+    public SensorMonitor(String description)
+    {
+        sensorMonitorID = UUID.randomUUID().toString();
+        sensorDescription = description;
     }
     
     public void pollData()
@@ -39,6 +46,14 @@ public class SensorMonitor {
         Location temp = new Location();
         
         return temp;
+    }
+    
+    public String getDescription() {
+        return sensorDescription;
+    }
+    
+    public String getID() {
+        return sensorMonitorID;
     }
     
     
