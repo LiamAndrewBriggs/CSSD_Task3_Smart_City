@@ -20,7 +20,7 @@ public class SensorStation {
     }
     
     public void addNewSensorMonitor(){
-        SensorMonitor newStation = new SensorMonitor("test");
+        SensorMonitor newStation = new SensorMonitor();
         sensorMonitors.add(newStation);
     }
     

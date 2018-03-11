@@ -96,7 +96,16 @@ public class UserInterface extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)sensorMonitorTable.getModel();
         
         sensorMonitors.forEach((thisMonitor) -> {
-            model.addRow(new Object[]{thisMonitor.getDescription(), "Column 2", "Column 3", "Column 4", thisMonitor.getID()});
+            String sensorName = thisMonitor.getSensor().getClass().getName().replace("SmartCity.", "");
+            
+            String status = "Active";
+            
+            if(thisMonitor.getStatus() == false)
+            {
+                status = "Not-Active";
+            }
+            
+            model.addRow(new Object[]{sensorName.replace("Sensor", " Sensor"), thisMonitor.reading, status, thisMonitor.getInterval(), thisMonitor.getID()});
         });
     }
     
@@ -115,7 +124,21 @@ public class UserInterface extends javax.swing.JFrame {
     
     private void populateSensorDetails()
     {
-        //todo
+        String sensorName = currentSensorMonitor.getSensor().getClass().getName().replace("SmartCity.", "");
+            
+        if(currentSensorMonitor.getStatus() == false)
+        {
+            statusComboBox.setSelectedItem("Active");
+        }
+        else
+        {
+            statusComboBox.setSelectedItem("Not-Active");
+        }
+        
+        updateDescriptionTextField.setText(sensorName.replace("Sensor", " Sensor"));
+        
+        frequencyUpdateField.setText(currentSensorMonitor.getInterval().toString());
+            
     }
     
     private void sort() 
@@ -316,11 +339,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-        updateDescriptionTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateDescriptionTextFieldActionPerformed(evt);
-            }
-        });
+        updateDescriptionTextField.setEditable(false);
 
         statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Not-Active" }));
 
@@ -507,8 +526,7 @@ public class UserInterface extends javax.swing.JFrame {
     private void updateSensorButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateSensorButtonMouseClicked
         selectSensorMonitor();
         switchScreens();
-        //sensorMonitors = currentSensorStation.getSensorMonitors();
-        //populateSensorMonitorList();
+        populateSensorDetails(); 
     }//GEN-LAST:event_updateSensorButtonMouseClicked
 
     private void updateSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSensorActionPerformed
@@ -522,10 +540,6 @@ public class UserInterface extends javax.swing.JFrame {
     private void cancelUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelUpdateMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelUpdateMouseClicked
-
-    private void updateDescriptionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateDescriptionTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateDescriptionTextFieldActionPerformed
 
     /**
     * @param args the command line arguments
