@@ -31,6 +31,19 @@ public class SensorMonitor {
         sensorDescription = description;
     }
     
+    public SensorMonitor(String newDesc, Object newIsActive, double newIsInterval)
+    {
+        sensorMonitorID = UUID.randomUUID().toString();
+        sensorDescription = newDesc;
+        interval = newIsInterval;
+        
+        if (newIsActive.equals("Active")) {
+            isActive = true;
+        } else {
+            isActive = false;
+        }
+    }
+    
     public void pollData()
     {
         
@@ -56,6 +69,7 @@ public class SensorMonitor {
         return sensorMonitorID;
     }
     
-    
-    
+    public void setSensorDescription(String desc) {
+        sensorDescription = desc;
+    }
 }
