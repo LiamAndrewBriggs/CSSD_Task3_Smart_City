@@ -230,7 +230,7 @@ public class UserInterface extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        cancelUpdate1 = new javax.swing.JButton();
+        cancelAdd = new javax.swing.JButton();
         addSensor = new javax.swing.JButton();
         descriptionAddTextField = new javax.swing.JTextField();
         statusAddComboBox = new javax.swing.JComboBox<>();
@@ -431,10 +431,10 @@ public class UserInterface extends javax.swing.JFrame {
 
         jLabel8.setText("Frequency");
 
-        cancelUpdate1.setText("Cancel");
-        cancelUpdate1.addMouseListener(new java.awt.event.MouseAdapter() {
+        cancelAdd.setText("Cancel");
+        cancelAdd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cancelUpdate1MouseClicked(evt);
+                cancelAddMouseClicked(evt);
             }
         });
 
@@ -444,24 +444,8 @@ public class UserInterface extends javax.swing.JFrame {
                 addSensorMouseClicked(evt);
             }
         });
-        addSensor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addSensorActionPerformed(evt);
-            }
-        });
-
-        descriptionAddTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                descriptionAddTextFieldActionPerformed(evt);
-            }
-        });
 
         statusAddComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Not-Active" }));
-        statusAddComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                statusAddComboBoxActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout sensorMonitorAddFrameLayout = new javax.swing.GroupLayout(sensorMonitorAddFrame.getContentPane());
         sensorMonitorAddFrame.getContentPane().setLayout(sensorMonitorAddFrameLayout);
@@ -473,7 +457,7 @@ public class UserInterface extends javax.swing.JFrame {
                         .addGap(176, 176, 176)
                         .addGroup(sensorMonitorAddFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(sensorMonitorAddFrameLayout.createSequentialGroup()
-                                .addComponent(cancelUpdate1)
+                                .addComponent(cancelAdd)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(addSensor))
                             .addComponent(jLabel5)))
@@ -507,7 +491,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(frequencyAddField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(sensorMonitorAddFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelUpdate1)
+                    .addComponent(cancelAdd)
                     .addComponent(addSensor))
                 .addGap(117, 117, 117))
         );
@@ -625,7 +609,6 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
         String query = searchField.getText().toLowerCase();
-        
         searchStation(query);
     }//GEN-LAST:event_searchFieldKeyReleased
 
@@ -662,16 +645,16 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_updateSensorMouseClicked
 
     private void cancelUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelUpdateMouseClicked
-        // TODO add your handling code here:
+        sensorMonitorUpdateFrame.dispose();
     }//GEN-LAST:event_cancelUpdateMouseClicked
 
     private void updateDescriptionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateDescriptionTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_updateDescriptionTextFieldActionPerformed
 
-    private void cancelUpdate1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelUpdate1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cancelUpdate1MouseClicked
+    private void cancelAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelAddMouseClicked
+        sensorMonitorAddFrame.dispose();
+    }//GEN-LAST:event_cancelAddMouseClicked
 
     private void addSensorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorMouseClicked
        SensorMonitor aSensorMonitor = new SensorMonitor(statusAddComboBox.getSelectedItem(), Double.valueOf(frequencyAddField.getText()));
@@ -679,18 +662,6 @@ public class UserInterface extends javax.swing.JFrame {
        populateSensorMonitorList();
        sensorMonitorAddFrame.dispose();
     }//GEN-LAST:event_addSensorMouseClicked
-
-    private void addSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSensorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addSensorActionPerformed
-
-    private void descriptionAddTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descriptionAddTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_descriptionAddTextFieldActionPerformed
-
-    private void statusAddComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusAddComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_statusAddComboBoxActionPerformed
 
     private void addSensorButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorButtonMouseClicked
         switchScreen("addSensor");
@@ -719,8 +690,8 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JButton addSensorButton;
     private javax.swing.JButton addSensorStation;
     private javax.swing.JButton backToHomeScreen;
+    private javax.swing.JButton cancelAdd;
     private javax.swing.JButton cancelUpdate;
-    private javax.swing.JButton cancelUpdate1;
     private javax.swing.JTextField descriptionAddTextField;
     private javax.swing.JTextField frequencyAddField;
     private javax.swing.JTextField frequencyUpdateField;

@@ -302,7 +302,7 @@
                           <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="cancelUpdate1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cancelAdd" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="addSensor" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -344,7 +344,7 @@
                   <Component id="frequencyAddField" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="63" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="cancelUpdate1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cancelAdd" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="addSensor" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
@@ -377,12 +377,12 @@
             <Property name="text" type="java.lang.String" value="Frequency"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="cancelUpdate1">
+        <Component class="javax.swing.JButton" name="cancelAdd">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancel"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cancelUpdate1MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cancelAddMouseClicked"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="addSensor">
@@ -391,13 +391,9 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSensorMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addSensorActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="descriptionAddTextField">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="descriptionAddTextFieldActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="statusAddComboBox">
           <Properties>
@@ -408,9 +404,6 @@
               </StringArray>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="statusAddComboBoxActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
