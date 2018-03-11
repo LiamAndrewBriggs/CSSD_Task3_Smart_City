@@ -59,6 +59,10 @@ public class SensorMonitor {
         return temp;
     }
     
+    public void setFrequency(String frequency) {
+        interval = Double.parseDouble(frequency);
+    }
+    
     public String getID() {
         return sensorMonitorID;
     }

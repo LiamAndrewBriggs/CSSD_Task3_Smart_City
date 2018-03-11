@@ -38,25 +38,18 @@ public class UserInterface extends javax.swing.JFrame {
             this.setVisible(true);
             sensorMonitorSelectFrame.show(false);
         }
-        else if (currentSensorMonitor == null) {
-            this.setVisible(false);
-            sensorMonitorSelectFrame.show(true);
-            Insets insets = sensorMonitorSelectFrame.getInsets();
-            sensorMonitorSelectFrame.setSize(new Dimension(insets.left + insets.right + 593,
-             insets.top + insets.bottom + 530));
-        }
-        else {
-            sensorMonitorSelectFrame.show(false);
-            sensorMonitorUpdateFrame.show(true);
-            Insets insets = sensorMonitorUpdateFrame.getInsets();
-            sensorMonitorUpdateFrame.setSize(new Dimension(insets.left + insets.right + 593,
-             insets.top + insets.bottom + 530));
-        }
     }
     
     public void switchScreen(String selectedScreen){
         if ("addSensor".equals(selectedScreen)){
             sensorMonitorAddFrame.setVisible(true);
+        }
+        else if ("SensorStation".equals(selectedScreen)){
+            this.setVisible(false);
+            sensorMonitorSelectFrame.setVisible(true);
+        }
+        else if("updateSensor".equals(selectedScreen)) {
+            sensorMonitorUpdateFrame.setVisible(true);
         }
     }
     
@@ -134,11 +127,11 @@ public class UserInterface extends javax.swing.JFrame {
             
         if(currentSensorMonitor.getStatus() == false)
         {
-            statusComboBox.setSelectedItem("Active");
+            statusComboBox.setSelectedItem("Not-Active");
         }
         else
         {
-            statusComboBox.setSelectedItem("Not-Active");
+            statusComboBox.setSelectedItem("Active");
         }
         
         updateDescriptionTextField.setText(sensorName.replace("Sensor", " Sensor"));
@@ -251,6 +244,8 @@ public class UserInterface extends javax.swing.JFrame {
 
         sensorMonitorSelectFrame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         sensorMonitorSelectFrame.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        sensorMonitorSelectFrame.setMinimumSize(new java.awt.Dimension(600, 575));
+        sensorMonitorSelectFrame.setPreferredSize(new java.awt.Dimension(600, 575));
 
         sensorMonitorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -320,7 +315,7 @@ public class UserInterface extends javax.swing.JFrame {
                     .addGroup(sensorMonitorSelectFrameLayout.createSequentialGroup()
                         .addGap(163, 163, 163)
                         .addComponent(searchMonitorField, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         sensorMonitorSelectFrameLayout.setVerticalGroup(
             sensorMonitorSelectFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,11 +329,12 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(searchMonitorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         sensorMonitorUpdateFrame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         sensorMonitorUpdateFrame.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        sensorMonitorUpdateFrame.setMinimumSize(new java.awt.Dimension(593, 530));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Update Sensor");
@@ -607,7 +603,7 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void viewSensorStationButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewSensorStationButtonClicked
             selectSensorStation();
-            switchScreens();
+            switchScreen("SensorStation");
             sensorMonitors = currentSensorStation.getSensorMonitors();
             populateSensorMonitorList();
     }//GEN-LAST:event_viewSensorStationButtonClicked
@@ -649,7 +645,7 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void updateSensorButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateSensorButtonMouseClicked
         selectSensorMonitor();
-        switchScreens();
+        switchScreen("updateSensor");
         populateSensorDetails(); 
     }//GEN-LAST:event_updateSensorButtonMouseClicked
 
@@ -658,7 +654,11 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_updateSensorActionPerformed
 
     private void updateSensorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateSensorMouseClicked
-        // TODO add your handling code here:
+        currentSensorMonitor.setFrequency(frequencyUpdateField.getText());
+        currentSensorMonitor = null;
+        sensorMonitorUpdateFrame.dispose();
+        switchScreen("SensorStation");
+        populateSensorMonitorList();
     }//GEN-LAST:event_updateSensorMouseClicked
 
     private void cancelUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelUpdateMouseClicked
