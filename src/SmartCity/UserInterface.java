@@ -102,7 +102,16 @@ public class UserInterface extends javax.swing.JFrame {
         model.setRowCount(0);
         
         sensorMonitors.forEach((thisMonitor) -> {
-            model.addRow(new Object[]{thisMonitor.getDescription(), "Column 2", "Column 3", "Column 4", thisMonitor.getID()});
+            String sensorName = thisMonitor.getSensor().getClass().getName().replace("SmartCity.", "");
+            
+            String status = "Active";
+            
+            if(thisMonitor.getStatus() == false)
+            {
+                status = "Not-Active";
+            }
+            
+            model.addRow(new Object[]{sensorName.replace("Sensor", " Sensor"), thisMonitor.reading, status, thisMonitor.getInterval(), thisMonitor.getID()});
         });
     }
     
@@ -119,25 +128,23 @@ public class UserInterface extends javax.swing.JFrame {
         tcm.removeColumn(tcm.getColumn(3));
     }
     
-    private void populateSensorMonitorList2()
-    {
-        DefaultTableModel model = (DefaultTableModel)sensorMonitorTable.getModel();
-        
-        ArrayList<SensorMonitor> list = currentSensorStation.getSensorMonitors();
-        Object rowData[] = new Object[5];
-        model.setRowCount(0);
-        for (SensorMonitor sensorMonitor : list){
-            rowData[0] = sensorMonitor.getDescription();
-            rowData[1] = "Test";
-            rowData[3] = "Test";
-            rowData[4] = "Test";
-            model.addRow(rowData);
-        }
-    }
-    
     private void populateSensorDetails()
     {
-        //todo
+        String sensorName = currentSensorMonitor.getSensor().getClass().getName().replace("SmartCity.", "");
+            
+        if(currentSensorMonitor.getStatus() == false)
+        {
+            statusComboBox.setSelectedItem("Active");
+        }
+        else
+        {
+            statusComboBox.setSelectedItem("Not-Active");
+        }
+        
+        updateDescriptionTextField.setText(sensorName.replace("Sensor", " Sensor"));
+        
+        frequencyUpdateField.setText(currentSensorMonitor.getInterval().toString());
+            
     }
     
     private void sort() 
@@ -361,11 +368,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-        updateDescriptionTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateDescriptionTextFieldActionPerformed(evt);
-            }
-        });
+        updateDescriptionTextField.setEditable(false);
 
         statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Not-Active" }));
 
@@ -647,8 +650,7 @@ public class UserInterface extends javax.swing.JFrame {
     private void updateSensorButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateSensorButtonMouseClicked
         selectSensorMonitor();
         switchScreens();
-        //sensorMonitors = currentSensorStation.getSensorMonitors();
-        //populateSensorMonitorList();
+        populateSensorDetails(); 
     }//GEN-LAST:event_updateSensorButtonMouseClicked
 
     private void updateSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSensorActionPerformed
@@ -672,7 +674,7 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelUpdate1MouseClicked
 
     private void addSensorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorMouseClicked
-       SensorMonitor aSensorMonitor = new SensorMonitor(descriptionAddTextField.getText(), statusAddComboBox.getSelectedItem(), Double.valueOf(frequencyAddField.getText()));
+       SensorMonitor aSensorMonitor = new SensorMonitor(statusAddComboBox.getSelectedItem(), Double.valueOf(frequencyAddField.getText()));
        sensorMonitors.add(aSensorMonitor);
        populateSensorMonitorList();
        sensorMonitorAddFrame.dispose();

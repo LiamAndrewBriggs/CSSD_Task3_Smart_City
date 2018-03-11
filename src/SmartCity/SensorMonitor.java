@@ -9,7 +9,6 @@ import java.util.*;
 public class SensorMonitor {
     
     private String sensorMonitorID;
-    private String sensorDescription;
     private ArrayList<Double> coords = new ArrayList<>();
     private Boolean isActive;
     private Double interval;
@@ -22,19 +21,16 @@ public class SensorMonitor {
     
     public SensorMonitor()
     {
-        
+        sensorMonitorID = UUID.randomUUID().toString();
+        sensor = new FloodSensor();
+        isActive = true;
+        interval = 70.00;
+        reading = new Data();
     }
     
-    public SensorMonitor(String description)
+    public SensorMonitor(Object newIsActive, double newIsInterval)
     {
         sensorMonitorID = UUID.randomUUID().toString();
-        sensorDescription = description;
-    }
-    
-    public SensorMonitor(String newDesc, Object newIsActive, double newIsInterval)
-    {
-        sensorMonitorID = UUID.randomUUID().toString();
-        sensorDescription = newDesc;
         interval = newIsInterval;
         
         if (newIsActive.equals("Active")) {
@@ -42,6 +38,8 @@ public class SensorMonitor {
         } else {
             isActive = false;
         }
+        sensor = new FloodSensor();
+        reading = new Data();
     }
     
     public void pollData()
@@ -61,15 +59,19 @@ public class SensorMonitor {
         return temp;
     }
     
-    public String getDescription() {
-        return sensorDescription;
-    }
-    
     public String getID() {
         return sensorMonitorID;
     }
     
-    public void setSensorDescription(String desc) {
-        sensorDescription = desc;
+    public Sensor getSensor() {
+        return sensor;
+    }
+    
+    public Double getInterval() {
+        return interval;
+    }
+    
+    public Boolean getStatus() {
+        return isActive;
     }
 }
