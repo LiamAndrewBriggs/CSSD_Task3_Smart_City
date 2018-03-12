@@ -411,7 +411,7 @@
               <StringArray count="3">
                 <StringItem index="0" value="Bin Sensor"/>
                 <StringItem index="1" value="Flood Sensor"/>
-                <StringItem index="2" value="Bin Sensor"/>
+                <StringItem index="2" value="Traffic Sensor"/>
               </StringArray>
             </Property>
           </Properties>
