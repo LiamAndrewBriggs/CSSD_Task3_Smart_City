@@ -28,7 +28,7 @@ public class SensorMonitor {
         reading = new Data();
     }
     
-    public SensorMonitor(Object newIsActive, double newIsInterval)
+    public SensorMonitor(Object newIsActive, double newIsInterval, String newDesc)
     {
         sensorMonitorID = UUID.randomUUID().toString();
         interval = newIsInterval;
@@ -38,7 +38,22 @@ public class SensorMonitor {
         } else {
             isActive = false;
         }
-        sensor = new FloodSensor();
+        
+        switch (newDesc) {
+            case "Flood Sensor":
+                sensor = new FloodSensor();
+                break;
+            case "Traffic Sensor":
+                sensor = new TrafficSensor();
+                break;
+            case "Bin Sensor":
+                sensor = new BinSensor();
+                break;
+            default:
+                sensor = null;
+                break;
+        }
+        
         reading = new Data();
     }
     
@@ -77,5 +92,9 @@ public class SensorMonitor {
     
     public Boolean getStatus() {
         return isActive;
+    }
+    
+    public void registerObserver(SensorStation newObserver) {
+        
     }
 }

@@ -245,7 +245,6 @@ public class UserInterface extends javax.swing.JFrame {
         sensorMonitorSelectFrame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         sensorMonitorSelectFrame.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         sensorMonitorSelectFrame.setMinimumSize(new java.awt.Dimension(600, 575));
-        sensorMonitorSelectFrame.setPreferredSize(new java.awt.Dimension(600, 575));
 
         sensorMonitorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -657,7 +656,7 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelAddMouseClicked
 
     private void addSensorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorMouseClicked
-       SensorMonitor aSensorMonitor = new SensorMonitor(statusAddComboBox.getSelectedItem(), Double.valueOf(frequencyAddField.getText()));
+       SensorMonitor aSensorMonitor = new SensorMonitor(statusAddComboBox.getSelectedItem(), Double.valueOf(frequencyAddField.getText()), descriptionAddTextField.getText());
        sensorMonitors.add(aSensorMonitor);
        populateSensorMonitorList();
        sensorMonitorAddFrame.dispose();
