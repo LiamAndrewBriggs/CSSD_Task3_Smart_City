@@ -232,9 +232,9 @@ public class UserInterface extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         cancelAdd = new javax.swing.JButton();
         addSensor = new javax.swing.JButton();
-        descriptionAddTextField = new javax.swing.JTextField();
         statusAddComboBox = new javax.swing.JComboBox<>();
         frequencyAddField = new javax.swing.JTextField();
+        descriptionSensor = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         sensorStationTable = new javax.swing.JTable();
         viewSensorStation = new javax.swing.JButton();
@@ -446,6 +446,13 @@ public class UserInterface extends javax.swing.JFrame {
 
         statusAddComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Not-Active" }));
 
+        descriptionSensor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bin Sensor", "Flood Sensor", "Bin Sensor" }));
+        descriptionSensor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descriptionSensorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout sensorMonitorAddFrameLayout = new javax.swing.GroupLayout(sensorMonitorAddFrame.getContentPane());
         sensorMonitorAddFrame.getContentPane().setLayout(sensorMonitorAddFrameLayout);
         sensorMonitorAddFrameLayout.setHorizontalGroup(
@@ -466,9 +473,9 @@ public class UserInterface extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
                             .addComponent(jLabel8)
-                            .addComponent(descriptionAddTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-                            .addComponent(statusAddComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(frequencyAddField))))
+                            .addComponent(statusAddComboBox, 0, 217, Short.MAX_VALUE)
+                            .addComponent(frequencyAddField)
+                            .addComponent(descriptionSensor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(236, Short.MAX_VALUE))
         );
         sensorMonitorAddFrameLayout.setVerticalGroup(
@@ -479,7 +486,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(descriptionAddTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(descriptionSensor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addGap(20, 20, 20)
@@ -656,7 +663,7 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelAddMouseClicked
 
     private void addSensorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorMouseClicked
-       SensorMonitor aSensorMonitor = new SensorMonitor(statusAddComboBox.getSelectedItem(), Double.valueOf(frequencyAddField.getText()), descriptionAddTextField.getText());
+       SensorMonitor aSensorMonitor = new SensorMonitor(statusAddComboBox.getSelectedItem(), Double.valueOf(frequencyAddField.getText()), descriptionSensor.getSelectedItem());
        sensorMonitors.add(aSensorMonitor);
        populateSensorMonitorList();
        sensorMonitorAddFrame.dispose();
@@ -669,6 +676,10 @@ public class UserInterface extends javax.swing.JFrame {
     private void addSensorButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorButtonMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_addSensorButtonMouseEntered
+
+    private void descriptionSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descriptionSensorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descriptionSensorActionPerformed
 
     /**
     * @param args the command line arguments
@@ -691,7 +702,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JButton backToHomeScreen;
     private javax.swing.JButton cancelAdd;
     private javax.swing.JButton cancelUpdate;
-    private javax.swing.JTextField descriptionAddTextField;
+    private javax.swing.JComboBox<String> descriptionSensor;
     private javax.swing.JTextField frequencyAddField;
     private javax.swing.JTextField frequencyUpdateField;
     private javax.swing.JLabel jLabel1;

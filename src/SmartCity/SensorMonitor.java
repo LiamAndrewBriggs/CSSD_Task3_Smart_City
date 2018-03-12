@@ -28,7 +28,7 @@ public class SensorMonitor {
         reading = new Data();
     }
     
-    public SensorMonitor(Object newIsActive, double newIsInterval, String newDesc)
+    public SensorMonitor(Object newIsActive, double newIsInterval, Object newDesc)
     {
         sensorMonitorID = UUID.randomUUID().toString();
         interval = newIsInterval;
@@ -39,19 +39,12 @@ public class SensorMonitor {
             isActive = false;
         }
         
-        switch (newDesc) {
-            case "Flood Sensor":
-                sensor = new FloodSensor();
-                break;
-            case "Traffic Sensor":
-                sensor = new TrafficSensor();
-                break;
-            case "Bin Sensor":
-                sensor = new BinSensor();
-                break;
-            default:
-                sensor = null;
-                break;
+        if (newDesc.equals("Bin Sensor")) {
+            sensor = new BinSensor();
+        } else if (newDesc.equals("Flood Sensor")) {
+            sensor = new FloodSensor();
+        } else {
+            sensor = new TrafficSensor();
         }
         
         reading = new Data();

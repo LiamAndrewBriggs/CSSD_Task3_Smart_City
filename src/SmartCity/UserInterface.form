@@ -312,9 +312,9 @@
                               <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="descriptionAddTextField" alignment="0" pref="217" max="32767" attributes="0"/>
-                              <Component id="statusAddComboBox" alignment="0" max="32767" attributes="0"/>
+                              <Component id="statusAddComboBox" alignment="0" pref="217" max="32767" attributes="0"/>
                               <Component id="frequencyAddField" alignment="0" max="32767" attributes="0"/>
+                              <Component id="descriptionSensor" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -330,7 +330,7 @@
                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="descriptionAddTextField" min="-2" max="-2" attributes="0"/>
+                  <Component id="descriptionSensor" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -390,8 +390,6 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSensorMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="descriptionAddTextField">
-        </Component>
         <Component class="javax.swing.JComboBox" name="statusAddComboBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -406,6 +404,23 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="frequencyAddField">
+        </Component>
+        <Component class="javax.swing.JComboBox" name="descriptionSensor">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="Bin Sensor"/>
+                <StringItem index="1" value="Flood Sensor"/>
+                <StringItem index="2" value="Bin Sensor"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="descriptionSensorActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
