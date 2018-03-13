@@ -7,8 +7,14 @@ public class EmbellishedData {
     public ArrayList<Double> location;
     public String sensorID;
     
-    public void EmbellishedData()
+     public EmbellishedData(Data data, Long timeInMillis, 
+                            ArrayList<Double> location, 
+                                String sensorID)
     {
-        //todo
+        this.data = data;
+        this.timeInMillis = timeInMillis;
+        this.location = location;
+        this.sensorID = sensorID;
     }
+
 }
