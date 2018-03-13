@@ -1,4 +1,5 @@
 package SmartCity;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -264,7 +265,7 @@ public class UserInterface extends javax.swing.JFrame {
         sensorStationNameJLabel = new javax.swing.JLabel();
         sensorStationLocationJLabel = new javax.swing.JLabel();
         cancelAdd1 = new javax.swing.JButton();
-        addSensor1 = new javax.swing.JButton();
+        addSensorStation = new javax.swing.JButton();
         sensorStationNameJTextField = new javax.swing.JTextField();
         sensorStationLatitudeJLabel = new javax.swing.JLabel();
         sensorStationLatitudeJTextField = new javax.swing.JTextField();
@@ -326,6 +327,9 @@ public class UserInterface extends javax.swing.JFrame {
         addSensorButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addSensorButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addSensorButtonMouseEntered(evt);
             }
         });
 
@@ -389,7 +393,7 @@ public class UserInterface extends javax.swing.JFrame {
                 updateSensorMouseClicked(evt);
             }
         });
-
+        
         updateDescriptionTextField.setEditable(false);
 
         statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Not-Active" }));
@@ -474,6 +478,11 @@ public class UserInterface extends javax.swing.JFrame {
         statusAddComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Not-Active" }));
 
         descriptionSensor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bin Sensor", "Flood Sensor", "Traffic Sensor" }));
+        descriptionSensor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descriptionSensorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout sensorMonitorAddFrameLayout = new javax.swing.GroupLayout(sensorMonitorAddFrame.getContentPane());
         sensorMonitorAddFrame.getContentPane().setLayout(sensorMonitorAddFrameLayout);
@@ -545,10 +554,10 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-        addSensor1.setText("Add");
-        addSensor1.addMouseListener(new java.awt.event.MouseAdapter() {
+        addSensorStation.setText("Add");
+        addSensorStation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addSensor1MouseClicked(evt);
+                addSensorStationMouseClicked(evt);
             }
         });
 
@@ -585,7 +594,7 @@ public class UserInterface extends javax.swing.JFrame {
                         .addGap(128, 128, 128)
                         .addComponent(cancelAdd1)
                         .addGap(20, 20, 20)
-                        .addComponent(addSensor1)))
+                        .addComponent(addSensorStation)))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
         addSensorStationJFrameLayout.setVerticalGroup(
@@ -608,7 +617,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(addSensorStationJFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelAdd1)
-                    .addComponent(addSensor1))
+                    .addComponent(addSensorStation))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
@@ -641,23 +650,14 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
         addSensorStationJButton.setText("Add Sensor Station");
-        addSensorStationJButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addSensorButtonClicked(evt);
-            }
-        });
-        addSensorStationJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addSensorStationJButtonActionPerformed(evt);
-            }
-        });
-=======
-        addSensorStation.setText("Add Sensor Station");
->>>>>>> 270ad598666a65849eb19eb3b414186164113c2a
 
         removeSensorStation.setText("Remove Sensor Station");
+        removeSensorStation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                removeSensorStationButtonClicked(evt);
+            }
+        });
 
         searchField.setText("Search");
         searchField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -772,17 +772,17 @@ public class UserInterface extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_descriptionSensorActionPerformed
 
-    private void addSensorStationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSensorStationJButtonActionPerformed
-        
-    }//GEN-LAST:event_addSensorStationJButtonActionPerformed
-
     private void cancelAdd1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelAdd1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelAdd1MouseClicked
 
-    private void addSensor1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensor1MouseClicked
+    private void addSensorStationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorStationMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_addSensor1MouseClicked
+    }//GEN-LAST:event_addSensorStationMouseClicked
+
+    private void removeSensorStationButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeSensorStationButtonClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeSensorStationButtonClicked
 
     /**
     * @param args the command line arguments
@@ -800,8 +800,8 @@ public class UserInterface extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addSensor;
-    private javax.swing.JButton addSensor1;
     private javax.swing.JButton addSensorButton;
+    private javax.swing.JButton addSensorStation;
     private javax.swing.JButton addSensorStationJButton;
     private javax.swing.JFrame addSensorStationJFrame;
     private javax.swing.JButton backToHomeScreen;

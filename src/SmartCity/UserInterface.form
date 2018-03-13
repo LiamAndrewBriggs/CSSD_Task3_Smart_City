@@ -465,7 +465,7 @@
                           <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
                           <Component id="cancelAdd1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="addSensor1" min="-2" max="-2" attributes="0"/>
+                          <Component id="addSensorStation" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="72" max="32767" attributes="0"/>
@@ -493,7 +493,7 @@
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="cancelAdd1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="addSensor1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="addSensorStation" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="58" max="32767" attributes="0"/>
               </Group>
@@ -534,12 +534,12 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cancelAdd1MouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="addSensor1">
+        <Component class="javax.swing.JButton" name="addSensorStation">
           <Properties>
             <Property name="text" type="java.lang.String" value="Add"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSensor1MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSensorStationMouseClicked"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="sensorStationNameJTextField">
@@ -694,10 +694,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Add Sensor Station"/>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSensorButtonClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addSensorStationJButtonActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="removeSensorStation">
       <Properties>
