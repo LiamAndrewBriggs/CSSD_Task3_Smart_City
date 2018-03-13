@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package SmartCity;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,10 +15,13 @@ public class Location {
     private double latitude;
     private double longitude;
 
-    public SensorMonitor getCoords() {
-        SensorMonitor temp = new SensorMonitor();
+    public ArrayList<Double> getCoords() {
+        ArrayList<Double> coords = new ArrayList<>();
         
-        return temp;
+        coords.add(latitude);
+        coords.add(longitude);
+        
+        return coords;
     }
     
     public void toAddress(){

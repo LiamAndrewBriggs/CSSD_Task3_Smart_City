@@ -7,6 +7,7 @@ public class SensorStation {
     
     private Mothership observer;
     private ArrayList<SensorMonitor> sensorMonitors = new ArrayList<>();
+    private ArrayList<Double> coords = new ArrayList<>();
     private String stationID;
     private String stationName;
     
