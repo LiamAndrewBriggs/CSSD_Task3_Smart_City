@@ -25,7 +25,7 @@ public class Mothership {
         SensorStation aSensorStation = new SensorStation(); 
         
         for (SensorStation thisStation : sensorStations) {
-            if(thisStation.getID().equals(sensorID));
+            if(thisStation.getStationID().equals(sensorID));
             aSensorStation = thisStation;
         }
         

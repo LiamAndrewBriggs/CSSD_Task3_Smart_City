@@ -8,15 +8,15 @@ import java.util.*;
 
 public class SensorMonitor {
     
-    private String sensorMonitorID;
     private ArrayList<Double> coords = new ArrayList<>();
-    private Boolean isActive;
     private Double interval;
-    private SensorStation observer;
+    private Boolean isActive;
     private Long lastReadingTime;
-    private Sensor sensor;
-    public Integer readingsCount;
+    private SensorStation observer;
     public Data reading;
+    public Integer readingsCount;
+    private Sensor sensor;
+    private String sensorMonitorID;
     
     
     public SensorMonitor()
@@ -50,23 +50,6 @@ public class SensorMonitor {
         reading = new Data();
     }
     
-    public void pollData()
-    {
-        
-    }
-    
-    public void setLocation(Location location)
-    {
-        
-    }
-    
-    public Location getLocation()
-    {
-        Location temp = new Location();
-        
-        return temp;
-    }
-    
     public void setFrequency(String frequency) {
         interval = Double.parseDouble(frequency);
     }
@@ -75,16 +58,29 @@ public class SensorMonitor {
         return sensorMonitorID;
     }
     
+    public Double getInterval() {
+        return interval;
+    }
+    public Location getLocation()
+    {
+        Location temp = new Location();
+        
+        return temp;
+    }
+    public void setLocation(Location location)
+    {
+        
+    }
     public Sensor getSensor() {
         return sensor;
     }
     
-    public Double getInterval() {
-        return interval;
-    }
-    
     public Boolean getStatus() {
         return isActive;
+    }
+    public void pollData()
+    {
+        
     }
     
     public void registerObserver(SensorStation newObserver) {
