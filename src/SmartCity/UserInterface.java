@@ -1,13 +1,18 @@
 package SmartCity;
-import java.awt.Dimension;
-import java.awt.Insets;
 import java.util.ArrayList;
-import java.util.function.Consumer;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 
+/**
+ * User Interface Class,
+ * This class is where the user interface is created
+ * and user actions are handled
+ * 
+ * @author Liam
+ * @version 1.00, 10 March 2018
+ */
 public class UserInterface extends javax.swing.JFrame {
 
     private Mothership motherShip = new Mothership();
@@ -16,12 +21,25 @@ public class UserInterface extends javax.swing.JFrame {
     private SensorStation currentSensorStation; 
     private SensorMonitor currentSensorMonitor;
        
-    
+     /**
+     *
+     * User Interface Constructor,
+     * 
+     * This method starts the User Interface, and Initializes the components 
+     *
+     * @see UserInterface
+     */
     public UserInterface() {
         initComponents();
         start();
     }
      
+    /**
+     *
+     * Start method,
+     * 
+     * This method begins the Data Gathering of the system
+     */
     public void start()
     {
         TableColumnModel tcm = sensorMonitorTable.getColumnModel();
@@ -32,6 +50,12 @@ public class UserInterface extends javax.swing.JFrame {
         sort();
     }
     
+    /**
+     *
+     * Switch Screens Method,
+     * 
+     * This method returns the user to the home screen
+     */
     public void switchScreens()
     {
         if(currentSensorMonitor == null && currentSensorStation == null) {
@@ -40,19 +64,38 @@ public class UserInterface extends javax.swing.JFrame {
         }
     }
     
+    /**
+      *
+     * Switch Screen Method,
+     * 
+     * This method handles the selection of the screen the
+     * user wishes to view
+     *
+     * @param selectedScreen the selected screen to view
+     */
     public void switchScreen(String selectedScreen){
-        if ("addSensor".equals(selectedScreen)){
-            sensorMonitorAddFrame.setVisible(true);
-        }
-        else if ("SensorStation".equals(selectedScreen)){
-            this.setVisible(false);
-            sensorMonitorSelectFrame.setVisible(true);
-        }
-        else if("updateSensor".equals(selectedScreen)) {
-            sensorMonitorUpdateFrame.setVisible(true);
+        if (null != selectedScreen) switch (selectedScreen) {
+            case "addSensor":
+                sensorMonitorAddFrame.setVisible(true);
+                break;
+            case "SensorStation":
+                this.setVisible(false);
+                sensorMonitorSelectFrame.setVisible(true);
+                break;
+            case "updateSensor":
+                sensorMonitorUpdateFrame.setVisible(true);
+                break;
+            default:
+                break;
         }
     }
     
+    /**
+     * Select the Sensor Station Method,
+     * 
+     * This method handles the selection of sensor station the
+     * user wishes to view
+     */
     public void selectSensorStation()
     {
         int column = 3;
@@ -60,7 +103,8 @@ public class UserInterface extends javax.swing.JFrame {
         
         if(row == -1)
         {
-            //alert
+            //if no sensor selected
+            
         }
         else {
             String sensorStationID = sensorStationTable.getModel().getValueAt(row, column).toString();
@@ -68,6 +112,12 @@ public class UserInterface extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Select the Sensor Monitor Method,
+     * 
+     * This method handles the selection of sensor monitor the
+     * user wishes to view
+     */
     public void selectSensorMonitor()
     {
         int column = 4;
@@ -75,18 +125,12 @@ public class UserInterface extends javax.swing.JFrame {
         
         if(row == -1)
         {
-            //alert
+            //if no monitor selected
         }
         else {
             String sensorMonitorID = sensorMonitorTable.getModel().getValueAt(row, column).toString();
             currentSensorMonitor = currentSensorStation.getSensorMonitor(sensorMonitorID);
         }
-    }
-    
-    public void updateSensorButtonClicked()
-    {
-        //switchScreen(sensorDetail);
-       // populateSensorDetails(sensorMonitorA);
     }
     
     private void populateSensorMonitorList()
@@ -177,27 +221,7 @@ public class UserInterface extends javax.swing.JFrame {
         sorter.setRowFilter(RowFilter.regexFilter(query));
     }
     
-    public void updateButtonClicked()
-    {
-        //sensorMonitors.setFrequency(frequency);
-        //switchScreen(sensorStation);
-    }
-    
-    public void changeFrequencyValue()
-    {
-        //todo
-    }
-    
-    public void changeDescriptionValue()
-    {
-        //todo
-    }
-    
-    public void changeStatusValue()
-    {
-        //todo
-    }
-    
+       
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -292,9 +316,6 @@ public class UserInterface extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addSensorButtonMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addSensorButtonMouseEntered(evt);
-            }
         });
 
         javax.swing.GroupLayout sensorMonitorSelectFrameLayout = new javax.swing.GroupLayout(sensorMonitorSelectFrame.getContentPane());
@@ -355,11 +376,6 @@ public class UserInterface extends javax.swing.JFrame {
         updateSensor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateSensorMouseClicked(evt);
-            }
-        });
-        updateSensor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateSensorActionPerformed(evt);
             }
         });
 
@@ -447,11 +463,6 @@ public class UserInterface extends javax.swing.JFrame {
         statusAddComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Not-Active" }));
 
         descriptionSensor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bin Sensor", "Flood Sensor", "Traffic Sensor" }));
-        descriptionSensor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                descriptionSensorActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout sensorMonitorAddFrameLayout = new javax.swing.GroupLayout(sensorMonitorAddFrame.getContentPane());
         sensorMonitorAddFrame.getContentPane().setLayout(sensorMonitorAddFrameLayout);
@@ -532,18 +543,8 @@ public class UserInterface extends javax.swing.JFrame {
         });
 
         addSensorStation.setText("Add Sensor Station");
-        addSensorStation.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addSensorButtonClicked(evt);
-            }
-        });
 
         removeSensorStation.setText("Remove Sensor Station");
-        removeSensorStation.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                removeSensorStationButtonClicked(evt);
-            }
-        });
 
         searchField.setText("Search");
         searchField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -598,21 +599,6 @@ public class UserInterface extends javax.swing.JFrame {
             populateSensorMonitorList();
     }//GEN-LAST:event_viewSensorStationButtonClicked
 
-    private void addSensorButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorButtonClicked
-        //switchScreen(addSensor);
-        
-        //addSensorSequenceDiagram has same button doing different thing
-        //no if condition is in diagram
-        
-        //currentSensorMonitor = currentSensorMonitor.SensorMonitor();
-        //currentSensorStation.addSensorMonitor(currentSensorMonitor);
-        //switchScreen(addSensor);
-    }//GEN-LAST:event_addSensorButtonClicked
-
-    private void removeSensorStationButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeSensorStationButtonClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_removeSensorStationButtonClicked
-
     private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
         String query = searchField.getText().toLowerCase();
         searchStation(query);
@@ -638,10 +624,6 @@ public class UserInterface extends javax.swing.JFrame {
         populateSensorDetails(); 
     }//GEN-LAST:event_updateSensorButtonMouseClicked
 
-    private void updateSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSensorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateSensorActionPerformed
-
     private void updateSensorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateSensorMouseClicked
         currentSensorMonitor.setFrequency(frequencyUpdateField.getText());
         currentSensorMonitor = null;
@@ -653,10 +635,6 @@ public class UserInterface extends javax.swing.JFrame {
     private void cancelUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelUpdateMouseClicked
         sensorMonitorUpdateFrame.dispose();
     }//GEN-LAST:event_cancelUpdateMouseClicked
-
-    private void updateDescriptionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateDescriptionTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateDescriptionTextFieldActionPerformed
 
     private void cancelAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelAddMouseClicked
         sensorMonitorAddFrame.dispose();
@@ -672,14 +650,6 @@ public class UserInterface extends javax.swing.JFrame {
     private void addSensorButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorButtonMouseClicked
         switchScreen("addSensor");
     }//GEN-LAST:event_addSensorButtonMouseClicked
-
-    private void addSensorButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorButtonMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addSensorButtonMouseEntered
-
-    private void descriptionSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descriptionSensorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_descriptionSensorActionPerformed
 
     /**
     * @param args the command line arguments

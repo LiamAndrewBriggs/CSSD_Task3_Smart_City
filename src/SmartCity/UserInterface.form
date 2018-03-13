@@ -141,7 +141,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSensorButtonMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSensorButtonMouseEntered"/>
           </Events>
         </Component>
       </SubComponents>
@@ -254,7 +253,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="updateSensorMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateSensorActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="updateDescriptionTextField">
@@ -415,9 +413,6 @@
               </StringArray>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="descriptionSensorActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -556,17 +551,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Add Sensor Station"/>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSensorButtonClicked"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="removeSensorStation">
       <Properties>
         <Property name="text" type="java.lang.String" value="Remove Sensor Station"/>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="removeSensorStationButtonClicked"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="searchField">
       <Properties>
