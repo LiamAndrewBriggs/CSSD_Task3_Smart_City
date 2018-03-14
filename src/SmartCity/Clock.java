@@ -33,7 +33,10 @@ public class Clock {
     
     private void notifyObservers()
     {
-        //sensorMonitor.doTick();
+        for (SensorMonitor sensorMonitor : observers)
+        {
+            sensorMonitor.doTick();
+        }
     }
     
     private void trackTime()

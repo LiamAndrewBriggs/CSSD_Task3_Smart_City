@@ -68,6 +68,11 @@ public class SensorMonitor {
     public Boolean getStatus() {
         return isActive;
     }
+    
+    public void doTick() {
+        interval--;
+    }
+    
     public void pollData()
     {
         
