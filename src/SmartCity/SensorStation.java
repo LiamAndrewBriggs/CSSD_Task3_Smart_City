@@ -15,11 +15,6 @@ public class SensorStation {
         
     }
     
-    public SensorStation(String name){
-        stationID = UUID.randomUUID().toString();
-        stationName = name;
-    }
-    
     public SensorStation(String name, Double latitude, Double longitude) {
        stationID =  UUID.randomUUID().toString();
        stationName = name;
