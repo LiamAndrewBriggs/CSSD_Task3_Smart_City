@@ -15,16 +15,15 @@ public class SensorStation {
         
     }
     
-    public SensorStation(String name, Double latitude, Double longitude) {
-       stationID =  UUID.randomUUID().toString();
+    public SensorStation(Integer id, String name, Double latitude, Double longitude) {
+       stationID =  id.toString();
        stationName = name;
        coords.add(latitude);
        coords.add(longitude);
     }
     
-    public void addSensorMonitor(){
-        SensorMonitor newStation = new SensorMonitor();
-        getSensorMonitors().add(newStation);
+    public void addSensorMonitor(SensorMonitor newStation){
+        sensorMonitors.add(newStation);
     }
     
     public SensorMonitor getSensorMonitor(String monitorID)

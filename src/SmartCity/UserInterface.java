@@ -1,6 +1,4 @@
 package SmartCity;
-import java.awt.event.MouseEvent;
-import java.sql.DriverManager;
 import java.util.ArrayList;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -8,8 +6,6 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.*;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
@@ -52,7 +48,6 @@ public class UserInterface extends javax.swing.JFrame {
     {
         TableColumnModel tcm = sensorMonitorTable.getColumnModel();
         sensorMonitorTable.removeColumn(tcm.getColumn(4));
-        motherShip.addNewSensorStation();
         sensorStations = motherShip.getSensorStations();
         populateSensorStationList();
         sort();
@@ -165,7 +160,6 @@ public class UserInterface extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)sensorStationTable.getModel();
        
         sensorStations.forEach((SensorStation thisStation) -> {
-            thisStation.addSensorMonitor();
             model.addRow(new Object[]{thisStation.getStationName(), thisStation.getCoords().toString(), "Column 3", thisStation.getStationID()});
         });
         
@@ -810,7 +804,7 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void addSensorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorMouseClicked
        SensorMonitor aSensorMonitor = new SensorMonitor(statusAddComboBox.getSelectedItem(), Double.valueOf(frequencyAddField.getText()), descriptionSensor.getSelectedItem());
-       sensorMonitors.add(aSensorMonitor);
+       currentSensorStation.addSensorMonitor(aSensorMonitor);
        populateSensorMonitorList();
        sensorMonitorAddFrame.dispose();
     }//GEN-LAST:event_addSensorMouseClicked

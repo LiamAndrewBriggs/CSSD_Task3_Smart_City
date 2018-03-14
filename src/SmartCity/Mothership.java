@@ -10,6 +10,32 @@ public class Mothership {
     //private {id} ID;
     private ArrayList<SensorStation> sensorStations = new ArrayList<>();
     
+    public Mothership() {
+        Connection con = UserInterface.getConnection();
+        
+        Statement st;
+        ResultSet rs;
+        SensorStation sensorStation;
+        
+        try{
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT * FROM SENSORSTATIONS");
+            
+            while(rs.next()){
+                sensorStation = new SensorStation(
+                    rs.getInt("StationID"),
+                    rs.getString("stationname"),
+                    rs.getDouble("latitude"),
+                    rs.getDouble("longitude")
+                );
+                sensorStations.add(sensorStation);
+            }
+            
+        } catch (SQLException ex){
+            
+        }
+    }
+    
     public void addNewSensorStation()
     {
         
@@ -25,8 +51,10 @@ public class Mothership {
         SensorStation aSensorStation = new SensorStation(); 
         
         for (SensorStation thisStation : sensorStations) {
-            if(thisStation.getStationID().equals(sensorID));
-            aSensorStation = thisStation;
+            if(thisStation.getStationID().equals(sensorID))
+            {
+                aSensorStation = thisStation;
+            }
         }
         
         return aSensorStation;
@@ -34,28 +62,6 @@ public class Mothership {
     
     public ArrayList<SensorStation> getSensorStations()
     {
-        Connection con = UserInterface.getConnection();
-        
-        Statement st;
-        ResultSet rs;
-        SensorStation sensorStation;
-        
-        try{
-            st = con.createStatement();
-            rs = st.executeQuery("SELECT * FROM SENSORSTATIONS");
-            
-            while(rs.next()){
-                sensorStation = new SensorStation(
-                    rs.getString("stationname"),
-                    rs.getDouble("latitude"),
-                    rs.getDouble("longitude")
-                );
-                sensorStations.add(sensorStation);
-            }
-            
-        } catch (SQLException ex){
-            
-        }
         return sensorStations;
     }
     
