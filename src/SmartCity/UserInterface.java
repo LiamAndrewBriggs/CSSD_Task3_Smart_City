@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.*;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  * User Interface Class,
@@ -121,15 +122,8 @@ public class UserInterface extends javax.swing.JFrame {
         int column = 3;
         int row = sensorStationTable.getSelectedRow();
         
-        if(row == -1)
-        {
-            //if no sensor selected
-            
-        }
-        else {
-            String sensorStationID = sensorStationTable.getModel().getValueAt(row, column).toString();
-            currentSensorStation = motherShip.getSensorStation(sensorStationID);
-        }
+        String sensorStationID = sensorStationTable.getModel().getValueAt(row, column).toString();
+        currentSensorStation = motherShip.getSensorStation(sensorStationID);
     }
     
     /**
@@ -143,14 +137,8 @@ public class UserInterface extends javax.swing.JFrame {
         int column = 4;
         int row = sensorMonitorTable.getSelectedRow();
         
-        if(row == -1)
-        {
-            //if no monitor selected
-        }
-        else {
-            String sensorMonitorID = sensorMonitorTable.getModel().getValueAt(row, column).toString();
-            currentSensorMonitor = currentSensorStation.getSensorMonitor(sensorMonitorID);
-        }
+        String sensorMonitorID = sensorMonitorTable.getModel().getValueAt(row, column).toString();
+        currentSensorMonitor = currentSensorStation.getSensorMonitor(sensorMonitorID);
     }
     
     private void populateSensorMonitorList()
@@ -227,7 +215,7 @@ public class UserInterface extends javax.swing.JFrame {
         
         sensorStationTable.setRowSorter(sorter);
         
-        sorter.setRowFilter(RowFilter.regexFilter(query));
+        sorter.setRowFilter(RowFilter.regexFilter(query,1));
     }
     
     private void searchMonitor(String query) 
@@ -725,20 +713,28 @@ public class UserInterface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void viewSensorStationButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewSensorStationButtonClicked
-            selectSensorStation();
-            switchScreen("SensorStation");
-            sensorMonitors = currentSensorStation.getSensorMonitors();
-            populateSensorMonitorList();
+            int row = sensorStationTable.getSelectedRow();
+        
+            if(row == -1)
+            {
+                showMessageDialog(null, "Please select a Sensor Station");
+            
+            }
+            else {
+                selectSensorStation();
+                switchScreen("SensorStation");
+                sensorMonitors = currentSensorStation.getSensorMonitors();
+                populateSensorMonitorList();
+            }
     }//GEN-LAST:event_viewSensorStationButtonClicked
 
     private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
-        String query = searchField.getText().toLowerCase();
+        String query = searchField.getText();
         searchStation(query);
     }//GEN-LAST:event_searchFieldKeyReleased
 
     private void searchMonitorFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchMonitorFieldKeyReleased
-        String query = searchMonitorField.getText().toLowerCase();
-        
+        String query = searchMonitorField.getText();
         searchMonitor(query);
     }//GEN-LAST:event_searchMonitorFieldKeyReleased
 
@@ -751,9 +747,18 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_backToHomeScreenMouseClicked
 
     private void updateSensorButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateSensorButtonMouseClicked
-        selectSensorMonitor();
-        switchScreen("updateSensor");
-        populateSensorDetails(); 
+        
+        int row = sensorMonitorTable.getSelectedRow();
+        
+        if(row == -1)
+        {
+            showMessageDialog(null, "Please select a Sensor Monitor");
+        }
+        else {
+            selectSensorMonitor();
+            switchScreen("updateSensor");
+            populateSensorDetails(); 
+        }
     }//GEN-LAST:event_updateSensorButtonMouseClicked
 
     private void updateSensorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateSensorMouseClicked
