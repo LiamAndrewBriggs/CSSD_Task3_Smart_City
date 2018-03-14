@@ -72,6 +72,10 @@ public class SensorMonitor {
     {
         
     }
+   
+    public void doTick() {
+        interval--;
+    }
     
     public void registerObserver(SensorStation newObserver) {
         
