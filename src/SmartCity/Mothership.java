@@ -1,5 +1,9 @@
 package SmartCity;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Mothership {
@@ -34,6 +38,28 @@ public class Mothership {
     
     public ArrayList<SensorStation> getSensorStations()
     {
+        Connection con = UserInterface.getConnection();
+        
+        Statement st;
+        ResultSet rs;
+        SensorStation sensorStation;
+        
+        try{
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT * FROM SENSORSTATIONS");
+            
+            while(rs.next()){
+                sensorStation = new SensorStation(
+                    rs.getString("stationname"),
+                    rs.getDouble("latitude"),
+                    rs.getDouble("longitude")
+                );
+                sensorStations.add(sensorStation);
+            }
+            
+        } catch (SQLException ex){
+            
+        }
         return sensorStations;
     }
     

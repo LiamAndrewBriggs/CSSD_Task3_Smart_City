@@ -1,10 +1,15 @@
 package SmartCity;
 import java.awt.event.MouseEvent;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * User Interface Class,
@@ -32,6 +37,7 @@ public class UserInterface extends javax.swing.JFrame {
      */
     public UserInterface() {
         initComponents();
+        getConnection();
         start();
     }
      
@@ -49,6 +55,19 @@ public class UserInterface extends javax.swing.JFrame {
         sensorStations = motherShip.getSensorStations();
         populateSensorStationList();
         sort();
+    }
+    
+    public static Connection getConnection()
+    {
+        Connection con;
+        try {
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/SmartCity", "dran", "dran");
+            System.out.println("Connected to SmartCity database.");
+            return con;
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
     
     /**
@@ -159,7 +178,7 @@ public class UserInterface extends javax.swing.JFrame {
        
         sensorStations.forEach((SensorStation thisStation) -> {
             thisStation.addSensorMonitor();
-            model.addRow(new Object[]{thisStation.getStationName(), "Column 2", "Column 3", thisStation.getStationID()});
+            model.addRow(new Object[]{thisStation.getStationName(), thisStation.getCoords().toString(), "Column 3", thisStation.getStationID()});
         });
         
         TableColumnModel tcm = sensorStationTable.getColumnModel();
@@ -393,7 +412,7 @@ public class UserInterface extends javax.swing.JFrame {
                 updateSensorMouseClicked(evt);
             }
         });
-        
+
         updateDescriptionTextField.setEditable(false);
 
         statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Not-Active" }));

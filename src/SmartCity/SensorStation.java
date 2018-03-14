@@ -7,6 +7,7 @@ public class SensorStation {
     
     private Mothership observer;
     private ArrayList<SensorMonitor> sensorMonitors = new ArrayList<>();
+    private ArrayList<Double> coords = new ArrayList<>();
     private String stationID;
     private String stationName;
     
@@ -17,6 +18,13 @@ public class SensorStation {
     public SensorStation(String name){
         stationID = UUID.randomUUID().toString();
         stationName = name;
+    }
+    
+    public SensorStation(String name, Double latitude, Double longitude) {
+       stationID =  UUID.randomUUID().toString();
+       stationName = name;
+       coords.add(latitude);
+       coords.add(longitude);
     }
     
     public void addSensorMonitor(){
@@ -106,6 +114,20 @@ public class SensorStation {
      */
     public void setStationName(String stationName) {
         this.stationName = stationName;
+    }
+
+    /**
+     * @return the coords
+     */
+    public ArrayList<Double> getCoords() {
+        return coords;
+    }
+
+    /**
+     * @param coords the coords to set
+     */
+    public void setCoords(ArrayList<Double> coords) {
+        this.coords = coords;
     }
     
 }
