@@ -8,7 +8,6 @@ import java.util.*;
 
 public class SensorMonitor {
     
-    private ArrayList<Double> coords = new ArrayList<>();
     private Double interval;
     private Boolean isActive;
     private Long lastReadingTime;
@@ -61,16 +60,7 @@ public class SensorMonitor {
     public Double getInterval() {
         return interval;
     }
-    public Location getLocation()
-    {
-        Location temp = new Location();
-        
-        return temp;
-    }
-    public void setLocation(Location location)
-    {
-        
-    }
+    
     public Sensor getSensor() {
         return sensor;
     }
