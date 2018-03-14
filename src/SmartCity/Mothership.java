@@ -38,28 +38,29 @@ public class Mothership {
     
     public ArrayList<SensorStation> getSensorStations()
     {
-        Connection con = UserInterface.getConnection();
+//        Connection con = UserInterface.getConnection();
+//        
+//        Statement st;
+//        ResultSet rs;
+//        SensorStation sensorStation;
+//        
+//        try{
+//            st = con.createStatement();
+//            rs = st.executeQuery("SELECT * FROM SENSORSTATIONS");
+//            
+//            while(rs.next()){
+//                sensorStation = new SensorStation(
+//                    rs.getString("stationname"),
+//                    rs.getDouble("latitude"),
+//                    rs.getDouble("longitude")
+//                );
+//                sensorStations.add(sensorStation);
+//            }
+//            
+//        } catch (SQLException ex){
+//            
+//        }
         
-        Statement st;
-        ResultSet rs;
-        SensorStation sensorStation;
-        
-        try{
-            st = con.createStatement();
-            rs = st.executeQuery("SELECT * FROM SENSORSTATIONS");
-            
-            while(rs.next()){
-                sensorStation = new SensorStation(
-                    rs.getString("stationname"),
-                    rs.getDouble("latitude"),
-                    rs.getDouble("longitude")
-                );
-                sensorStations.add(sensorStation);
-            }
-            
-        } catch (SQLException ex){
-            
-        }
         return sensorStations;
     }
     

@@ -37,7 +37,7 @@ public class UserInterface extends javax.swing.JFrame {
      */
     public UserInterface() {
         initComponents();
-        getConnection();
+        //getConnection();
         start();
     }
      
