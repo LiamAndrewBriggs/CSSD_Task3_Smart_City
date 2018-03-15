@@ -388,9 +388,6 @@ public class UserInterface extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addSensorButtonMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addSensorButtonMouseEntered(evt);
-            }
         });
 
         monitorSearchCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Description", "Status", "Frequency" }));
@@ -868,10 +865,6 @@ public class UserInterface extends javax.swing.JFrame {
     private void addSensorButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorButtonMouseClicked
         switchScreen("addSensor");
     }//GEN-LAST:event_addSensorButtonMouseClicked
-
-    private void addSensorButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorButtonMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addSensorButtonMouseEntered
 
     private void cancelAdd1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelAdd1MouseClicked
         addSensorStationFrame.dispose();

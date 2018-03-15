@@ -156,7 +156,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSensorButtonMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSensorButtonMouseEntered"/>
           </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="monitorSearchCombo">
