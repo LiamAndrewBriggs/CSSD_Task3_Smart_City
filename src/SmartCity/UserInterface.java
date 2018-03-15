@@ -189,6 +189,8 @@ public class UserInterface extends javax.swing.JFrame {
             
     }
     
+    //Added to the back of the UI Data Searching the sort functionality enables 
+    //added freedom to manipulate the data toi easily find what the user wants. 
     private void sort() 
     {
         DefaultTableModel model = (DefaultTableModel)sensorStationTable.getModel();
@@ -204,6 +206,7 @@ public class UserInterface extends javax.swing.JFrame {
         sensorMonitorTable.setRowSorter(sorter);
     }
     
+    //This searches through the sensor stations, by column titles 
     private void searchStation(String query) 
     {
         DefaultTableModel model = (DefaultTableModel)sensorStationTable.getModel();
@@ -219,10 +222,9 @@ public class UserInterface extends javax.swing.JFrame {
         else {
             sorter.setRowFilter(RowFilter.regexFilter(query,1));
         }
-        
-        
     }
     
+    //This searches through the sensor monitors, by column titles 
     private void searchMonitor(String query) 
     {
         DefaultTableModel model = (DefaultTableModel)sensorMonitorTable.getModel();
@@ -314,7 +316,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {

@@ -75,7 +75,7 @@
                     <Column editable="true" title="Sensor Description" type="java.lang.String"/>
                     <Column editable="true" title="Current Data" type="java.lang.String"/>
                     <Column editable="true" title="Status" type="java.lang.String"/>
-                    <Column editable="true" title="Frequency" type="java.lang.Object"/>
+                    <Column editable="true" title="Frequency" type="java.lang.Double"/>
                     <Column editable="true" title="ID" type="java.lang.String"/>
                   </Table>
                 </Property>
