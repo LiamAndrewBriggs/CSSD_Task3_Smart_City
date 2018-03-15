@@ -48,8 +48,13 @@ public class UserInterface extends javax.swing.JFrame {
      */
     public void start()
     {
+        //Hide the ID column from view
         TableColumnModel tcm = sensorMonitorTable.getColumnModel();
         sensorMonitorTable.removeColumn(tcm.getColumn(4));
+        
+        tcm = sensorStationTable.getColumnModel();
+        tcm.removeColumn(tcm.getColumn(3));
+        
         sensorStations = motherShip.getSensorStations();
         populateSensorStationList();
         sort();
@@ -118,6 +123,9 @@ public class UserInterface extends javax.swing.JFrame {
             case "updateSensor":
                 sensorMonitorUpdateFrame.setVisible(true);
                 break;
+            case "addStation":
+                addSensorStationFrame.setVisible(true);
+                break;
             default:
                 break;
         }
@@ -175,6 +183,7 @@ public class UserInterface extends javax.swing.JFrame {
     private void populateSensorStationList()
     {
         DefaultTableModel model = (DefaultTableModel)sensorStationTable.getModel();
+        model.setRowCount(0);
         
         for (SensorStation thisStation : sensorStations){ 
             int count = 0;
@@ -189,9 +198,6 @@ public class UserInterface extends javax.swing.JFrame {
                                 
             model.addRow(new Object[]{thisStation.getStationName(), thisStation.getCoords().toString(), count, thisStation.getStationID()});
         }
-        
-        TableColumnModel tcm = sensorStationTable.getColumnModel();
-        tcm.removeColumn(tcm.getColumn(3));
     }
     
     private void populateSensorDetails()
@@ -308,7 +314,7 @@ public class UserInterface extends javax.swing.JFrame {
         statusAddComboBox = new javax.swing.JComboBox<>();
         frequencyAddField = new javax.swing.JTextField();
         descriptionSensor = new javax.swing.JComboBox<>();
-        addSensorStationJFrame = new javax.swing.JFrame();
+        addSensorStationFrame = new javax.swing.JFrame();
         jLabel9 = new javax.swing.JLabel();
         sensorStationNameJLabel = new javax.swing.JLabel();
         sensorStationLocationJLabel = new javax.swing.JLabel();
@@ -528,19 +534,11 @@ public class UserInterface extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addSensorMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addSensorMouseEntered(evt);
-            }
         });
 
         statusAddComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Not-Active" }));
 
         descriptionSensor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bin Sensor", "Flood Sensor", "Traffic Sensor" }));
-        descriptionSensor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                descriptionSensorActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout sensorMonitorAddFrameLayout = new javax.swing.GroupLayout(sensorMonitorAddFrame.getContentPane());
         sensorMonitorAddFrame.getContentPane().setLayout(sensorMonitorAddFrameLayout);
@@ -591,9 +589,9 @@ public class UserInterface extends javax.swing.JFrame {
                 .addGap(117, 117, 117))
         );
 
-        addSensorStationJFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addSensorStationJFrame.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        addSensorStationJFrame.setMinimumSize(new java.awt.Dimension(593, 530));
+        addSensorStationFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addSensorStationFrame.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        addSensorStationFrame.setMinimumSize(new java.awt.Dimension(593, 530));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel9.setText("Add Sensor Station");
@@ -625,19 +623,19 @@ public class UserInterface extends javax.swing.JFrame {
         sensorStationLongitudeJLabel.setText("Longitude:");
         sensorStationLongitudeJLabel.setToolTipText("");
 
-        javax.swing.GroupLayout addSensorStationJFrameLayout = new javax.swing.GroupLayout(addSensorStationJFrame.getContentPane());
-        addSensorStationJFrame.getContentPane().setLayout(addSensorStationJFrameLayout);
-        addSensorStationJFrameLayout.setHorizontalGroup(
-            addSensorStationJFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addSensorStationJFrameLayout.createSequentialGroup()
-                .addGroup(addSensorStationJFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(addSensorStationJFrameLayout.createSequentialGroup()
+        javax.swing.GroupLayout addSensorStationFrameLayout = new javax.swing.GroupLayout(addSensorStationFrame.getContentPane());
+        addSensorStationFrame.getContentPane().setLayout(addSensorStationFrameLayout);
+        addSensorStationFrameLayout.setHorizontalGroup(
+            addSensorStationFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addSensorStationFrameLayout.createSequentialGroup()
+                .addGroup(addSensorStationFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addSensorStationFrameLayout.createSequentialGroup()
                         .addGap(97, 97, 97)
-                        .addGroup(addSensorStationJFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(addSensorStationFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(sensorStationLocationJLabel)
                             .addComponent(sensorStationNameJLabel)
                             .addComponent(sensorStationNameJTextField)
-                            .addGroup(addSensorStationJFrameLayout.createSequentialGroup()
+                            .addGroup(addSensorStationFrameLayout.createSequentialGroup()
                                 .addComponent(sensorStationLatitudeJLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(sensorStationLatitudeJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -645,19 +643,19 @@ public class UserInterface extends javax.swing.JFrame {
                                 .addComponent(sensorStationLongitudeJLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(sensorStationLongitudeJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(addSensorStationJFrameLayout.createSequentialGroup()
+                    .addGroup(addSensorStationFrameLayout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(jLabel9))
-                    .addGroup(addSensorStationJFrameLayout.createSequentialGroup()
+                    .addGroup(addSensorStationFrameLayout.createSequentialGroup()
                         .addGap(128, 128, 128)
                         .addComponent(cancelAdd1)
                         .addGap(20, 20, 20)
                         .addComponent(addSensorStation)))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
-        addSensorStationJFrameLayout.setVerticalGroup(
-            addSensorStationJFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addSensorStationJFrameLayout.createSequentialGroup()
+        addSensorStationFrameLayout.setVerticalGroup(
+            addSensorStationFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addSensorStationFrameLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jLabel9)
                 .addGap(42, 42, 42)
@@ -667,13 +665,13 @@ public class UserInterface extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(sensorStationLocationJLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addGroup(addSensorStationJFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(addSensorStationFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sensorStationLatitudeJLabel)
                     .addComponent(sensorStationLatitudeJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sensorStationLongitudeJLabel)
                     .addComponent(sensorStationLongitudeJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
-                .addGroup(addSensorStationJFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(addSensorStationFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelAdd1)
                     .addComponent(addSensorStation))
                 .addContainerGap(58, Short.MAX_VALUE))
@@ -709,11 +707,21 @@ public class UserInterface extends javax.swing.JFrame {
         });
 
         addSensorStationJButton.setText("Add Sensor Station");
+        addSensorStationJButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addSensorStationJButtonMouseClicked(evt);
+            }
+        });
 
         removeSensorStation.setText("Remove Sensor Station");
         removeSensorStation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 removeSensorStationButtonClicked(evt);
+            }
+        });
+        removeSensorStation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeSensorStationActionPerformed(evt);
             }
         });
 
@@ -799,6 +807,8 @@ public class UserInterface extends javax.swing.JFrame {
         currentSensorStation = null;
         DefaultTableModel model = (DefaultTableModel)sensorMonitorTable.getModel();
         model.setRowCount(0);
+        
+        populateSensorStationList();
                 
         switchScreens();
     }//GEN-LAST:event_backToHomeScreenMouseClicked
@@ -836,8 +846,6 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void addSensorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorMouseClicked
        SensorMonitor aSensorMonitor = new SensorMonitor(statusAddComboBox.getSelectedItem(), Double.valueOf(frequencyAddField.getText()), descriptionSensor.getSelectedItem());
-       String query = "INSERT INTO SENSORMONITORS (MONITORID, STATIONID, DESCRIPTION, STATUS, FREQUENCY) VALUES ("+ mID++ +","+ Integer.parseInt(currentSensorStation.getStationID()) + "," + "'" + String.valueOf(descriptionSensor.getSelectedItem()) + "'" + "," + "'" + String.valueOf(statusAddComboBox.getSelectedItem()) + "'" + "," + Double.valueOf(frequencyAddField.getText()) + ")";
-       executeSQLQuery(query);
        currentSensorStation.addSensorMonitor(aSensorMonitor);
        populateSensorMonitorList();
        sensorMonitorAddFrame.dispose();
@@ -851,25 +859,38 @@ public class UserInterface extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_addSensorButtonMouseEntered
 
-    private void descriptionSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descriptionSensorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_descriptionSensorActionPerformed
-
     private void cancelAdd1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelAdd1MouseClicked
-        // TODO add your handling code here:
+        addSensorStationFrame.dispose();
     }//GEN-LAST:event_cancelAdd1MouseClicked
 
     private void addSensorStationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorStationMouseClicked
-        // TODO add your handling code here:
+       SensorStation aSensorStation = new SensorStation(sensorStationNameJTextField.getText(), Double.valueOf(sensorStationLatitudeJTextField.getText()), Double.valueOf(sensorStationLongitudeJTextField.getText()));
+       motherShip.addNewSensorStation(aSensorStation);
+       populateSensorStationList();
+       addSensorStationFrame.dispose();
     }//GEN-LAST:event_addSensorStationMouseClicked
 
     private void removeSensorStationButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeSensorStationButtonClicked
-        // TODO add your handling code here:
+        int row = sensorStationTable.getSelectedRow();
+        
+        if(row == -1)
+        {
+            showMessageDialog(null, "Please select a Sensor Station");
+        }
+        else {
+            selectSensorStation();
+            motherShip.removeSensorStation(currentSensorStation);
+            populateSensorStationList();
+        }
     }//GEN-LAST:event_removeSensorStationButtonClicked
 
-    private void addSensorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorMouseEntered
+    private void addSensorStationJButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorStationJButtonMouseClicked
+        switchScreen("addStation");
+    }//GEN-LAST:event_addSensorStationJButtonMouseClicked
+
+    private void removeSensorStationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSensorStationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_addSensorMouseEntered
+    }//GEN-LAST:event_removeSensorStationActionPerformed
 
     /**
     * @param args the command line arguments
@@ -889,8 +910,8 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JButton addSensor;
     private javax.swing.JButton addSensorButton;
     private javax.swing.JButton addSensorStation;
+    private javax.swing.JFrame addSensorStationFrame;
     private javax.swing.JButton addSensorStationJButton;
-    private javax.swing.JFrame addSensorStationJFrame;
     private javax.swing.JButton backToHomeScreen;
     private javax.swing.JButton cancelAdd;
     private javax.swing.JButton cancelAdd1;

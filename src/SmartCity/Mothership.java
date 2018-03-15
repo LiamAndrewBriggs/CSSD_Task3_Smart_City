@@ -46,10 +46,11 @@ public class Mothership {
     
     /**
      * Adds a new Sensor Station
+     * @param newStation
      */
-    public void addNewSensorStation()
+    public void addNewSensorStation(SensorStation newStation)
     {
-        
+        sensorStations.add(newStation);
     }
     
     /**
@@ -92,8 +93,8 @@ public class Mothership {
     /**
      *
      */
-    public void removeSensorStation()
+    public void removeSensorStation(SensorStation oldStation)
     {
-        //todo
+        sensorStations.remove(oldStation);
     }
 }
