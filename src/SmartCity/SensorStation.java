@@ -47,6 +47,7 @@ public class SensorStation {
        coords.add(latitude);
        coords.add(longitude);
        
+       
         Connection con = UserInterface.getConnection();
         
         Statement st;
@@ -62,7 +63,8 @@ public class SensorStation {
                     rs.getInt("MonitorID"),
                     rs.getString("Description"),
                     rs.getString("Status"),
-                    rs.getDouble("Frequency")
+                    rs.getDouble("Frequency"),
+                    coords
                 );
                 sensorMonitors.add(sensorMonitor);
             }
@@ -78,6 +80,8 @@ public class SensorStation {
      */
     public void addSensorMonitor(SensorMonitor newStation){
         sensorMonitors.add(newStation);
+        
+        newStation.registerObserver(this);
     }
     
     /**
@@ -208,6 +212,10 @@ public class SensorStation {
      */
     public void updateSensorFrequency(){
         
+    }
+    
+    public void receiveEmbellishedData(EmbellishedData data){
+        observer.receiveStationData(data);
     }
    
 }

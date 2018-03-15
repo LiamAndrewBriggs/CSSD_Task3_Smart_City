@@ -43,7 +43,7 @@ public class SensorMonitorTest {
     @Test
     public void testGetInterval() {
         System.out.println("getInterval");
-        SensorMonitor instance = new SensorMonitor(1, "Test Description", "Active", 70);
+        SensorMonitor instance = new SensorMonitor(1, "Test Description", "Active", 70, null);
         double expResult = 70;
         double result = instance.getInterval();
         assertEquals(expResult, result, 1);
@@ -56,7 +56,7 @@ public class SensorMonitorTest {
     @Test
     public void testGetIsActive() {
         System.out.println("getIsActive");
-        SensorMonitor instance = new SensorMonitor(1, "Test Description", "Active", 70);
+        SensorMonitor instance = new SensorMonitor(1, "Test Description", "Active", 70, null);
         Boolean expResult = true;
         Boolean result = instance.getIsActive();
         assertEquals(expResult, result);
@@ -68,7 +68,7 @@ public class SensorMonitorTest {
     @Test
     public void testGetSensor() {
         System.out.println("getSensor");
-        SensorMonitor instance = new SensorMonitor(1, "Test Description", "Active", 70);
+        SensorMonitor instance = new SensorMonitor(1, "Test Description", "Active", 70, null);
         Sensor result = instance.getSensor();
         assertNotNull(result);  
     }
@@ -79,7 +79,7 @@ public class SensorMonitorTest {
     @Test
     public void testGetSensorMonitorID() {
         System.out.println("getSensorMonitorID");
-        SensorMonitor instance = new SensorMonitor(1, "Test Description", "Active", 70);
+        SensorMonitor instance = new SensorMonitor(1, "Test Description", "Active", 70, null);
         String expResult = "1";
         String result = instance.getSensorMonitorID();
         assertEquals(expResult, result);

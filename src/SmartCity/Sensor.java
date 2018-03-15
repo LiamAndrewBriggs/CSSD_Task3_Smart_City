@@ -30,4 +30,8 @@ public class Sensor {
         
         return temp;
     }
+    
+    public String getID(){
+        return sensorID;
+    }
 }

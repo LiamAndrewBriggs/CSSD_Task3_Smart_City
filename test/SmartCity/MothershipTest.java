@@ -45,7 +45,8 @@ public class MothershipTest {
     public void testAddNewSensorStation() {
         System.out.println("addNewSensorStation");
         Mothership instance = new Mothership();
-        instance.addNewSensorStation();
+        SensorStation sensorStation = new SensorStation();
+        instance.addNewSensorStation(sensorStation);
         assertNotNull(instance.getSensorStations());
     }
 

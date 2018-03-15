@@ -18,6 +18,8 @@ public class SensorMonitor {
     private Boolean isActive;
     private Long lastReadingTime;
     private SensorStation observer;
+    private ArrayList<Double> coords;
+    private EmbellishedData embellishedData;
     /**
      * Has a data object
      */
@@ -75,7 +77,7 @@ public class SensorMonitor {
      * @param status
      * @param frequency
      */
-    public SensorMonitor(int id, String desc, String status, double frequency)
+    public SensorMonitor(int id, String desc, String status, double frequency, ArrayList<Double> coords)
     {
         sensorMonitorID = Integer.toString(id);
         
@@ -94,12 +96,19 @@ public class SensorMonitor {
         }
         
         interval = frequency;
+        
+        Clock clock = Clock.getInstance();
+        clock.registerObserver(this);
     }
     /**
      *
      */
     public void doTick() {
         interval--;
+        
+        if (interval == 0){
+            getReadingsCount();
+        }
     }
     
     /**
@@ -170,8 +179,10 @@ public class SensorMonitor {
     /**
      * @return the reading
      */
-    public Data getReading() {
-        return reading;
+    public void shouldTakeReading() {
+        reading = sensor.getData();
+        embellishData();
+        shouldNotifySensorStation();
     }
     /**
      * @param reading the reading to set
@@ -232,5 +243,37 @@ public class SensorMonitor {
      */
     public void registerObserver(SensorStation newObserver) {
         
+    }
+    
+    public EmbellishedData embellishData(){
+        Random r = new Random();
+        long timeInMills = r.nextInt(100); 
+        ArrayList<Double> coords = getCoords();
+        String id = sensor.getID();
+        EmbellishedData embellishedData = new EmbellishedData(reading, timeInMills, coords, sensor.getID());
+        
+        return embellishedData;
+    }
+
+    /**
+     * @return the coords
+     */
+    public ArrayList<Double> getCoords() {
+        return coords;
+    }
+
+    /**
+     * @param coords the coords to set
+     */
+    public void setCoords(ArrayList<Double> coords) {
+        this.coords = coords;
+    }
+    
+    private void shouldNotifySensorStation(){
+        observer.receiveSensorData(embellishedData);
+    }
+    
+    public Data getReading(){
+        return reading;
     }
 }
