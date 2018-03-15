@@ -72,7 +72,7 @@ public class Clock {
     }
     
     /**
-     *
+     * Returns the first instance of clock, making this class a singleton.
      * @return
      */
     public static Clock getInstance()
@@ -85,7 +85,7 @@ public class Clock {
     }
     
     /**
-     *
+     * Waits for time to pass before operating.
      */
     public void waitForTime()
     {

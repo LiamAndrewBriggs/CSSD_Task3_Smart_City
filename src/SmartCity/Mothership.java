@@ -6,10 +6,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Dran
+ */
 public class Mothership {
     //private {id} ID;
     private ArrayList<SensorStation> sensorStations = new ArrayList<>();
     
+    /**
+     * Constructor for a Mothership instance
+     * Connects to the Java DB to fetch Sensor Stations data
+     */
     public Mothership() {
         Connection con = UserInterface.getConnection();
         
@@ -36,16 +44,19 @@ public class Mothership {
         }
     }
     
+    /**
+     * Adds a new Sensor Station
+     */
     public void addNewSensorStation()
     {
         
     }
     
-    public void removeSensorStation()
-    {
-        //todo
-    }
-    
+    /**
+     * Returns a Sensor Station object
+     * @param sensorID
+     * @return
+     */
     public SensorStation getSensorStation(String sensorID)
     {
         SensorStation aSensorStation = new SensorStation(); 
@@ -60,12 +71,28 @@ public class Mothership {
         return aSensorStation;
     }
     
+    /**
+     * Returns a list of Sensor Stations
+     * @return
+     */
     public ArrayList<SensorStation> getSensorStations()
     {
         return sensorStations;
     }
     
+    /**
+     * 
+     * @param data
+     */
     public void receiveStationData(EmbellishedData data)
+    {
+        //todo
+    }
+
+    /**
+     *
+     */
+    public void removeSensorStation()
     {
         //todo
     }

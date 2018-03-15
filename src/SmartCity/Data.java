@@ -6,7 +6,8 @@
 package SmartCity;
 
 /**
- *
+ * Data class
+ * This class contains the data produced by a sensor.
  * @author Dran
  */
 public class Data {

@@ -7,7 +7,7 @@ package SmartCity;
 import java.util.ArrayList;
 
 /**
- *
+ * This class stores the co-ordinates (latitude and longitude) of each location
  * @author Dran
  */
 public class Location {
@@ -15,6 +15,10 @@ public class Location {
     private double latitude;
     private double longitude;
 
+    /**
+     * Returns a list of co-ordinates
+     * @return
+     */
     public ArrayList<Double> getCoords() {
         ArrayList<Double> coords = new ArrayList<>();
         
@@ -24,6 +28,9 @@ public class Location {
         return coords;
     }
     
+    /**
+     * 
+     */
     public void toAddress(){
         
     }

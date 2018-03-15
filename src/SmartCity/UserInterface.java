@@ -53,6 +53,10 @@ public class UserInterface extends javax.swing.JFrame {
         sort();
     }
     
+    /**
+     * Connects to the Java DB
+     * @return
+     */
     public static Connection getConnection()
     {
         Connection con;
@@ -150,7 +154,7 @@ public class UserInterface extends javax.swing.JFrame {
                 status = "Not-Active";
             }
             
-            model.addRow(new Object[]{sensorName.replace("Sensor", " Sensor"), thisMonitor.reading, status, thisMonitor.getInterval(), thisMonitor.getID()});
+            model.addRow(new Object[]{sensorName.replace("Sensor", " Sensor"), thisMonitor.getReading(), status, thisMonitor.getInterval(), thisMonitor.getSensorMonitorID()});
         });
     }
     

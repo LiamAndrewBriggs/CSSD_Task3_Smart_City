@@ -7,18 +7,33 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ *
+ * @author Dran
+ */
 public class SensorStation {
+    private ArrayList<Double> coords = new ArrayList<>();
     
     private Mothership observer;
     private ArrayList<SensorMonitor> sensorMonitors = new ArrayList<>();
-    private ArrayList<Double> coords = new ArrayList<>();
     private String stationID;
     private String stationName;
     
+    /**
+     *
+     */
     public SensorStation(){
         
     }
     
+    /**
+     * Constructor for a Sensor Station object
+     * Requires an ID, name, latitude and longitude
+     * @param id
+     * @param name
+     * @param latitude
+     * @param longitude
+     */
     public SensorStation(Integer id, String name, Double latitude, Double longitude) {
        stationID =  id.toString();
        stationName = name;
@@ -50,43 +65,26 @@ public class SensorStation {
         }
     }
     
+    /**
+     * Adds a Sensor Monitor to the list of Sensor Monitors a Sensor Station has
+     * @param newStation
+     */
     public void addSensorMonitor(SensorMonitor newStation){
         sensorMonitors.add(newStation);
     }
     
-    public SensorMonitor getSensorMonitor(String monitorID)
-    {
-        SensorMonitor aSensorMonitor = new SensorMonitor();
-        
-        for (SensorMonitor thisStation : getSensorMonitors()) {
-            if(thisStation.getID().equals(monitorID));
-            aSensorMonitor = thisStation;
-        }
-        
-        return aSensorMonitor;
-    }
-    public ArrayList<SensorMonitor> getSensorMonitors(){
-        return sensorMonitors;
+    /**
+     * @return the coords
+     */
+    public ArrayList<Double> getCoords() {
+        return coords;
     }
     
-    public PublicInterface receiveSensorData(EmbellishedData temp){
-        PublicInterface temp2 = new PublicInterface();
-        
-        return temp2;
-    }
-    
-    public void registerObserver(Mothership temp){
-        
-    }
-    public void removeSensorMonitor(){
-        
-    }
-
-    public void unregisterObserver(Mothership temp){
-        
-    }
-    public void updateSensorFrequency(){ 
-        
+    /**
+     * @param coords the coords to set
+     */
+    public void setCoords(ArrayList<Double> coords) {
+        this.coords = coords;
     }
 
     /**
@@ -101,6 +99,32 @@ public class SensorStation {
      */
     public void setObserver(Mothership observer) {
         this.observer = observer;
+    }
+    
+    /**
+     * Get a Sensor Monitor from the 
+     * @param monitorID
+     * @return
+     */
+    public SensorMonitor getSensorMonitor(String monitorID)
+    {
+        SensorMonitor aSensorMonitor = new SensorMonitor();
+        
+        for (SensorMonitor thisStation : getSensorMonitors()) {
+            if(thisStation.getSensorMonitorID().equals(monitorID)) {
+                aSensorMonitor = thisStation;
+            }
+        }
+        
+        return aSensorMonitor;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public ArrayList<SensorMonitor> getSensorMonitors(){
+        return sensorMonitors;
     }
 
     /**
@@ -137,19 +161,46 @@ public class SensorStation {
     public void setStationName(String stationName) {
         this.stationName = stationName;
     }
-
+    
     /**
-     * @return the coords
+     *
+     * @param temp
+     * @return
      */
-    public ArrayList<Double> getCoords() {
-        return coords;
+    public PublicInterface receiveSensorData(EmbellishedData temp){
+        PublicInterface temp2 = new PublicInterface();
+        
+        return temp2;
     }
 
     /**
-     * @param coords the coords to set
+     *
+     * @param temp
      */
-    public void setCoords(ArrayList<Double> coords) {
-        this.coords = coords;
+    public void registerObserver(Mothership temp){
+        
     }
     
+    /**
+     * Removes a Sensor Monitor
+     */
+    public void removeSensorMonitor(){
+        
+    }
+    
+    /**
+     * Unregisters a Mothership observer
+     * @param temp
+     */
+    public void unregisterObserver(Mothership temp){
+        
+    }
+    
+    /**
+     *  Updates a Sensor's frequency
+     */
+    public void updateSensorFrequency(){
+        
+    }
+   
 }
