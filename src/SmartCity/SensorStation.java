@@ -191,8 +191,9 @@ public class SensorStation {
     /**
      * Removes a Sensor Monitor
      */
-    public void removeSensorMonitor(){
-        
+    public void removeSensorMonitor(SensorMonitor oldMonitor)
+    {
+        sensorMonitors.remove(oldMonitor);
     }
     
     /**
