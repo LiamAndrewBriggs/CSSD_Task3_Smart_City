@@ -6,6 +6,7 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.Statement;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
@@ -23,6 +24,7 @@ public class UserInterface extends javax.swing.JFrame {
     private ArrayList<SensorMonitor> sensorMonitors;
     private SensorStation currentSensorStation; 
     private SensorMonitor currentSensorMonitor;
+    static int mID = 101;
        
      /**
      *
@@ -66,6 +68,18 @@ public class UserInterface extends javax.swing.JFrame {
         } catch (Exception e){
             e.printStackTrace();
             return null;
+        }
+    }
+    
+    public void executeSQLQuery(String query) {
+        Connection con = getConnection();
+        Statement st;
+        
+        try {
+            st = con.createStatement();
+            st.executeUpdate(query);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
     
@@ -149,7 +163,7 @@ public class UserInterface extends javax.swing.JFrame {
             
             String status = "Active";
             
-            if(thisMonitor.getStatus() == false)
+            if(thisMonitor.getIsActive() == false)
             {
                 status = "Not-Active";
             }
@@ -174,7 +188,7 @@ public class UserInterface extends javax.swing.JFrame {
     {
         String sensorName = currentSensorMonitor.getSensor().getClass().getName().replace("SmartCity.", "");
             
-        if(currentSensorMonitor.getStatus() == false)
+        if(currentSensorMonitor.getIsActive() == false)
         {
             statusComboBox.setSelectedItem("Not-Active");
         }
@@ -504,6 +518,9 @@ public class UserInterface extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addSensorMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addSensorMouseEntered(evt);
+            }
         });
 
         statusAddComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Not-Active" }));
@@ -809,6 +826,8 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void addSensorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorMouseClicked
        SensorMonitor aSensorMonitor = new SensorMonitor(statusAddComboBox.getSelectedItem(), Double.valueOf(frequencyAddField.getText()), descriptionSensor.getSelectedItem());
+       String query = "INSERT INTO SENSORMONITORS (MONITORID, STATIONID, DESCRIPTION, STATUS, FREQUENCY) VALUES ("+ mID++ +","+ Integer.parseInt(currentSensorStation.getStationID()) + "," + "'" + String.valueOf(descriptionSensor.getSelectedItem()) + "'" + "," + "'" + String.valueOf(statusAddComboBox.getSelectedItem()) + "'" + "," + Double.valueOf(frequencyAddField.getText()) + ")";
+       executeSQLQuery(query);
        currentSensorStation.addSensorMonitor(aSensorMonitor);
        populateSensorMonitorList();
        sensorMonitorAddFrame.dispose();
@@ -837,6 +856,10 @@ public class UserInterface extends javax.swing.JFrame {
     private void removeSensorStationButtonClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeSensorStationButtonClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_removeSensorStationButtonClicked
+
+    private void addSensorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSensorMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addSensorMouseEntered
 
     /**
     * @param args the command line arguments

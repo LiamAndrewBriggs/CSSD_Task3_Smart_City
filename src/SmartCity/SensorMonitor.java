@@ -221,13 +221,6 @@ public class SensorMonitor {
     }
     /**
      *
-     * @return
-     */
-    public Boolean getStatus() {
-        return getIsActive();
-    }
-    /**
-     *
      */
     public void pollData()
     {
