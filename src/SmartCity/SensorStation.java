@@ -26,6 +26,13 @@ public class SensorStation {
         
     }
     
+    public SensorStation(String name, Double latitude, Double longitude) {
+       stationID =  UUID.randomUUID().toString();
+       stationName = name;
+       coords.add(latitude);
+       coords.add(longitude);
+    }
+    
     /**
      * Constructor for a Sensor Station object
      * Requires an ID, name, latitude and longitude

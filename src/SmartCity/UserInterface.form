@@ -75,7 +75,7 @@
                     <Column editable="true" title="Sensor Description" type="java.lang.String"/>
                     <Column editable="true" title="Current Data" type="java.lang.String"/>
                     <Column editable="true" title="Status" type="java.lang.String"/>
-                    <Column editable="true" title="Frequency" type="java.lang.Object"/>
+                    <Column editable="true" title="Frequency" type="java.lang.Double"/>
                     <Column editable="true" title="ID" type="java.lang.String"/>
                   </Table>
                 </Property>
@@ -407,7 +407,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSensorMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSensorMouseEntered"/>
           </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="statusAddComboBox">
@@ -435,16 +434,13 @@
               </StringArray>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="descriptionSensorActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JFrame" name="addSensorStationJFrame">
+    <Container class="javax.swing.JFrame" name="addSensorStationFrame">
       <Properties>
         <Property name="defaultCloseOperation" type="int" value="2"/>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -669,7 +665,7 @@
               <Table columnCount="4" rowCount="0">
                 <Column editable="true" title="Sensor Station" type="java.lang.String"/>
                 <Column editable="true" title="Location" type="java.lang.String"/>
-                <Column editable="true" title="Number of Active Sensors " type="java.lang.String"/>
+                <Column editable="true" title="Number of Active Sensors " type="java.lang.Integer"/>
                 <Column editable="true" title="ID" type="java.lang.String"/>
               </Table>
             </Property>
@@ -719,6 +715,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Add Sensor Station"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSensorStationJButtonMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="removeSensorStation">
       <Properties>
@@ -726,6 +725,7 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="removeSensorStationButtonClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeSensorStationActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="searchField">
