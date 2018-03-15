@@ -65,8 +65,6 @@ public class SensorMonitor {
         } else {
             sensor = new TrafficSensor();
         }
-        
-        reading = new Data();
     }
     
     /**
