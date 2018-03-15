@@ -58,7 +58,6 @@ public class UserInterface extends javax.swing.JFrame {
         Connection con;
         try {
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/SmartCity", "dran", "dran");
-            System.out.println("Connected to SmartCity database.");
             return con;
         } catch (Exception e){
             e.printStackTrace();

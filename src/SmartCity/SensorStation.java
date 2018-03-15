@@ -1,5 +1,9 @@
 package SmartCity;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -20,6 +24,30 @@ public class SensorStation {
        stationName = name;
        coords.add(latitude);
        coords.add(longitude);
+       
+        Connection con = UserInterface.getConnection();
+        
+        Statement st;
+        ResultSet rs;
+        SensorMonitor sensorMonitor;
+        
+        try{
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT * FROM SENSORMONITORS WHERE STATIONID=" + Integer.parseInt(stationID) + "");
+            
+            while(rs.next()){
+                sensorMonitor = new SensorMonitor(
+                    rs.getInt("MonitorID"),
+                    rs.getString("Description"),
+                    rs.getString("Status"),
+                    rs.getDouble("Frequency")
+                );
+                sensorMonitors.add(sensorMonitor);
+            }
+            
+        } catch (SQLException ex){
+            
+        }
     }
     
     public void addSensorMonitor(SensorMonitor newStation){

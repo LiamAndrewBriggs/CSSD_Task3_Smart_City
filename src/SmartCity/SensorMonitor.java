@@ -49,6 +49,27 @@ public class SensorMonitor {
         reading = new Data();
     }
     
+    public SensorMonitor(int id, String desc, String status, double frequency)
+    {
+        sensorMonitorID = Integer.toString(id);
+        
+        if (desc.equals("Bin Sensor")) {
+            sensor = new BinSensor();
+        } else if (desc.equals("Flood Sensor")) {
+            sensor = new FloodSensor();
+        } else {
+            sensor = new TrafficSensor();
+        }
+        
+        if (status.equals("Active")) {
+            isActive = true;
+        } else {
+            isActive = false;
+        }
+        
+        interval = frequency;
+    }
+    
     public void setFrequency(String frequency) {
         interval = Double.parseDouble(frequency);
     }
