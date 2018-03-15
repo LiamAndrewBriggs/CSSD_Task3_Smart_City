@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -18,6 +19,7 @@ public class SensorStation {
     private ArrayList<SensorMonitor> sensorMonitors = new ArrayList<>();
     private String stationID;
     private String stationName;
+    public List<EmbellishedData> stationData;
     
     /**
      *
@@ -47,7 +49,6 @@ public class SensorStation {
        coords.add(latitude);
        coords.add(longitude);
        
-       
         Connection con = UserInterface.getConnection();
         
         Statement st;
@@ -63,8 +64,7 @@ public class SensorStation {
                     rs.getInt("MonitorID"),
                     rs.getString("Description"),
                     rs.getString("Status"),
-                    rs.getDouble("Frequency"),
-                    coords
+                    rs.getDouble("Frequency")
                 );
                 sensorMonitors.add(sensorMonitor);
             }
@@ -80,8 +80,6 @@ public class SensorStation {
      */
     public void addSensorMonitor(SensorMonitor newStation){
         sensorMonitors.add(newStation);
-        
-        newStation.registerObserver(this);
     }
     
     /**
@@ -178,12 +176,19 @@ public class SensorStation {
      * @param temp
      * @return
      */
+    /*
     public PublicInterface receiveSensorData(EmbellishedData temp){
         PublicInterface temp2 = new PublicInterface();
         
         return temp2;
     }
-
+*/
+    //Think this works better but not sure how it fits in with sql stuff
+    public List<EmbellishedData> receiveSensorData(EmbellishedData embellishedData){
+        for (int i=sensorMonitors.size(); i<0;i--)
+            stationData.add(i, embellishedData);
+        return stationData;
+    }
     /**
      *
      * @param temp
@@ -195,9 +200,8 @@ public class SensorStation {
     /**
      * Removes a Sensor Monitor
      */
-    public void removeSensorMonitor(SensorMonitor oldMonitor)
-    {
-        sensorMonitors.remove(oldMonitor);
+    public void removeSensorMonitor(){
+        
     }
     
     /**
@@ -213,10 +217,6 @@ public class SensorStation {
      */
     public void updateSensorFrequency(){
         
-    }
-    
-    public void receiveEmbellishedData(EmbellishedData data){
-        observer.receiveStationData(data);
     }
    
 }

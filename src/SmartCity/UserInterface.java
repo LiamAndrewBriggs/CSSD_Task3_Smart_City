@@ -38,6 +38,8 @@ public class UserInterface extends javax.swing.JFrame {
         initComponents();
         getConnection();
         start();
+        Clock clock = Clock.getInstance();
+        
     }
      
     /**

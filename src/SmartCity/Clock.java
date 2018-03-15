@@ -8,24 +8,33 @@ import java.util.*;
  * @author Dran
  */
 public class Clock {
-
-    /**
-     * A list of Sensor Monitors that are registered observers.
-     */
-    public ArrayList<SensorMonitor> observers = new ArrayList<>();
+    private static Clock clock = null;
+    
+    public static Clock getInstance()
+    {
+        if (clock == null)
+            clock = new Clock();
+        
+        return clock;
+    }
 
     /**
      * 
      */
-    public double notifyFrequency;
-    private static Clock clock;
+    public double notifyFrequency = 3000;
+    /**
+     * A list of Sensor Monitors that are registered observers.
+     */
+    public ArrayList<SensorMonitor> observers = new ArrayList<>();
+    /**
+     * Returns the first instance of clock, making this class a singleton.
+     * @return
+     */
     
-    private Clock()
-    {
-        this.observers = observers;
-        this.notifyFrequency = notifyFrequency;
-        this.clock = clock;
+    private Clock(){
+        trackTime();
     }
+
     
     /**
      * Returns the clock object.
@@ -53,6 +62,15 @@ public class Clock {
     {
         observers.remove(sensorMonitor);
     }
+    /**
+     * Waits for time to pass before operating.
+     */
+    public void waitForTime()
+    {
+        while (notifyFrequency != 0) {
+            notifyFrequency--;
+        }
+    }
     
     private void notifyObservers()
     {
@@ -69,26 +87,5 @@ public class Clock {
             waitForTime();
             notifyObservers();
         }
-    }
-    
-    /**
-     * Returns the first instance of clock, making this class a singleton.
-     * @return
-     */
-    public static Clock getInstance()
-    {
-        if(clock == null)
-        {
-            clock = new Clock();
-        }
-        return clock;
-    }
-    
-    /**
-     * Waits for time to pass before operating.
-     */
-    public void waitForTime()
-    {
-        
-    }
+    } 
 }
