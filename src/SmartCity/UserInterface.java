@@ -71,6 +71,10 @@ public class UserInterface extends javax.swing.JFrame {
         }
     }
     
+    
+     /**
+     * For executing SQL queries
+     */
     public void executeSQLQuery(String query) {
         Connection con = getConnection();
         Statement st;
