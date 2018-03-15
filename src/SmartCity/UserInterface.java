@@ -175,10 +175,20 @@ public class UserInterface extends javax.swing.JFrame {
     private void populateSensorStationList()
     {
         DefaultTableModel model = (DefaultTableModel)sensorStationTable.getModel();
-       
-        sensorStations.forEach((SensorStation thisStation) -> {
-            model.addRow(new Object[]{thisStation.getStationName(), thisStation.getCoords().toString(), "Column 3", thisStation.getStationID()});
-        });
+        
+        for (SensorStation thisStation : sensorStations){ 
+            int count = 0;
+            ArrayList<SensorMonitor> monitors = new ArrayList();
+            monitors = thisStation.getSensorMonitors();
+            for (SensorMonitor thisMonitor : monitors){
+                if(thisMonitor.getIsActive() == true)
+                {
+                    count++;
+                }
+            }
+                                
+            model.addRow(new Object[]{thisStation.getStationName(), thisStation.getCoords().toString(), count, thisStation.getStationID()});
+        }
         
         TableColumnModel tcm = sensorStationTable.getColumnModel();
         tcm.removeColumn(tcm.getColumn(3));
@@ -681,7 +691,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {

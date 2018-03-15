@@ -669,7 +669,7 @@
               <Table columnCount="4" rowCount="0">
                 <Column editable="true" title="Sensor Station" type="java.lang.String"/>
                 <Column editable="true" title="Location" type="java.lang.String"/>
-                <Column editable="true" title="Number of Active Sensors " type="java.lang.String"/>
+                <Column editable="true" title="Number of Active Sensors " type="java.lang.Integer"/>
                 <Column editable="true" title="ID" type="java.lang.String"/>
               </Table>
             </Property>
